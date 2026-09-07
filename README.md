@@ -6,7 +6,8 @@ Portfólio comercial de Allan Sousa e da Pixel Code Studio. A página apresenta 
 
 ## Stack
 
-- React 19 e Vite
+- React 19, TypeScript e Vite
+- Tailwind CSS v4 com estrutura e aliases compatíveis com shadcn/ui
 - Motion (`motion/react`) para animações, gestos, scroll e transições
 - Lucide React para iconografia
 - CSS responsivo com suporte a `prefers-reduced-motion`
@@ -16,6 +17,7 @@ Portfólio comercial de Allan Sousa e da Pixel Code Studio. A página apresenta 
 - [Motion](https://github.com/motiondivision/motion): biblioteca de animação instalada pelo pacote atual `motion` e importada de `motion/react`.
 - [21st.dev Community Components](https://21st.dev/community/components): componentes `BackgroundPaths`, `TextRotate`, `Spotlight` e `Marquee` incorporados como componentes reutilizáveis e adaptados à identidade do estúdio.
 - [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill): sistema visual pesquisado e persistido em `design-system/pixel-code-studio-portfolio`.
+- `BottomNavBar`: navegação flutuante em `src/components/ui`, personalizada para as seções e os contatos do portfólio.
 
 ## Desenvolvimento
 
@@ -28,6 +30,7 @@ npm run dev
 
 ```bash
 npm run lint
+npm run typecheck
 npm run build
 ```
 

@@ -9,6 +9,8 @@ Este portfólio usa componentes abertos encontrados no catálogo do [21st.dev](h
 | `Spotlight.jsx` | [Spotlight — Julien Thibeaut](https://21st.dev/@ibelick/components/spotlight) | [Motion Primitives](https://github.com/ibelick/motion-primitives) | MIT |
 | `Marquee.jsx` | [Marquee — Ali Imam](https://21st.dev/@designali-in/components/marquee) | API pública do componente | Conforme publicação do autor |
 
+O componente `bottom-nav-bar.tsx` foi integrado a partir do código fornecido para o projeto, com textos em português, destinos reais, acompanhamento automático da seção ativa, foco visível e migração do import para `motion/react`.
+
 As animações usam [Motion](https://github.com/motiondivision/motion) por meio do pacote `motion` e de imports em `motion/react`.
 
 O sistema visual foi pesquisado com o [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), usando o perfil de portfólio criativo, estilo brutalista, composição assimétrica e movimento padrão. O resultado persistido está na pasta `design-system/pixel-code-studio-portfolio`.

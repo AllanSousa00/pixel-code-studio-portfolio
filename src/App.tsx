@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import type { ComponentType, ReactNode } from 'react'
 import {
-  AnimatePresence,
   MotionConfig,
   motion,
   useReducedMotion,
@@ -18,18 +17,35 @@ import {
   ExternalLink,
   GitFork,
   Layers3,
-  Menu,
   MousePointer2,
   Sparkles,
-  X,
   Zap,
 } from 'lucide-react'
 import BackgroundPaths from './components/ui/BackgroundPaths'
+import BottomNavBar from './components/ui/bottom-nav-bar'
 import { Marquee } from './components/ui/Marquee'
 import { Spotlight } from './components/ui/Spotlight'
 import TextRotate from './components/ui/TextRotate'
 
-const projects = [
+const TypedTextRotate = TextRotate as ComponentType<{
+  texts: string[]
+  as?: 'span' | 'strong' | 'p'
+  mainClassName?: string
+  rotationInterval?: number
+}>
+
+type Project = {
+  name: string
+  kind: string
+  description: string
+  image: string
+  live: string
+  repo?: string
+  tags: string[]
+  featured?: boolean
+}
+
+const projects: Project[] = [
   {
     name: 'Vértice ENEM',
     kind: 'Plataforma educacional',
@@ -107,16 +123,16 @@ const process = [
   ['04', 'Lançamento', 'Publicamos, testamos em produção e deixamos uma base preparada para evolução e manutenção.'],
 ]
 
-const technologies = ['React', 'TypeScript', 'JavaScript', 'Node.js', 'Cloudflare', 'APIs', 'Discord', 'UI/UX', 'Automação', 'GitHub']
+const technologies = ['Pixel Code Studio', 'Sites sob medida', 'Plataformas web', 'Bots e automações', 'Experiências para jogos', 'Design com identidade', 'Projetos reais']
 const rotatingWords = ['sites', 'plataformas', 'bots', 'experiências']
 const contactLink = 'mailto:allancruzsousa519@gmail.com?subject=Quero%20criar%20um%20projeto%20com%20a%20Pixel%20Code%20Studio'
 
 const reveal = {
   hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const } },
 }
 
-function Reveal({ children, className = '' }) {
+function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
     <motion.div className={className} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}>
       {children}
@@ -124,7 +140,7 @@ function Reveal({ children, className = '' }) {
   )
 }
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <motion.article className={`project-card ${project.featured ? 'project-card--featured' : ''}`} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }} whileHover={{ y: -8 }} transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.2) }}>
       <Spotlight className="project-spotlight" size={560} />
@@ -151,7 +167,6 @@ function ProjectCard({ project, index }) {
 }
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
   const reduceMotion = useReducedMotion()
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 130, damping: 30, restDelta: 0.001 })
@@ -162,13 +177,9 @@ function App() {
       <motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Pixel Code Studio — início"><span className="brand-mark" aria-hidden="true"><span>P</span></span><span>Pixel Code<br /><strong>Studio</strong></span></a>
-        <nav className="desktop-nav" aria-label="Navegação principal"><a href="#projetos">Projetos</a><a href="#servicos">Serviços</a><a href="#processo">Processo</a></nav>
-        <a className="header-cta" href={contactLink}>Vamos criar <ArrowUpRight aria-hidden="true" /></a>
-        <button className="menu-button" type="button" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen} aria-controls="mobile-menu" aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}>{menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}</button>
-        <AnimatePresence>
-          {menuOpen && <motion.nav id="mobile-menu" className="mobile-nav" aria-label="Navegação móvel" initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}><a href="#projetos" onClick={() => setMenuOpen(false)}>Projetos</a><a href="#servicos" onClick={() => setMenuOpen(false)}>Serviços</a><a href="#processo" onClick={() => setMenuOpen(false)}>Processo</a><a href={contactLink} onClick={() => setMenuOpen(false)}>Falar sobre um projeto</a></motion.nav>}
-        </AnimatePresence>
+        <a className="header-cta" href={contactLink}><span>Vamos criar</span> <ArrowUpRight aria-hidden="true" /></a>
       </header>
+      <BottomNavBar stickyBottom />
 
       <main>
         <section className="hero-section" id="inicio">
@@ -180,7 +191,7 @@ function App() {
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.1 }}>Ideias digitais<br />que saem do <em>óbvio.</em></motion.h1>
             <motion.div className="hero-bottom" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.45 }}>
               <p>Desenhamos e desenvolvemos</p>
-              <div className="rotating-line"><TextRotate texts={rotatingWords} as="strong" mainClassName="rotating-word" rotationInterval={2300} /></div>
+              <div className="rotating-line"><TypedTextRotate texts={rotatingWords} as="strong" mainClassName="rotating-word" rotationInterval={2300} /></div>
               <p>com identidade e propósito.</p>
             </motion.div>
             <motion.div className="hero-actions" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}><a className="button button--primary" href="#projetos">Ver projetos <ArrowDownRight aria-hidden="true" /></a><a className="button button--ghost" href="https://github.com/AllanSousa00" target="_blank" rel="noreferrer"><GitFork aria-hidden="true" /> GitHub</a></motion.div>
@@ -189,7 +200,7 @@ function App() {
           <div className="hero-counter" aria-label="Sete experiências publicadas"><strong>07</strong><span>experiências<br />no ar</span></div>
         </section>
 
-        <Marquee className="marquee" speed="normal" label={`Tecnologias: ${technologies.join(', ')}`}>{technologies.map((technology) => <span key={technology}><Code2 aria-hidden="true" /> {technology}</span>)}</Marquee>
+        <Marquee className="marquee" speed="normal" label={`Pixel Code Studio: ${technologies.join(', ')}`}>{technologies.map((technology) => <span key={technology}><Code2 aria-hidden="true" /> {technology}</span>)}</Marquee>
 
         <section className="section projects-section" id="projetos">
           <Reveal className="section-heading"><div><p className="kicker"><Sparkles aria-hidden="true" /> Trabalho selecionado</p><h2>Projetos reais.<br /><em>Resultados visíveis.</em></h2></div><p>Uma seleção de produtos publicados, com interfaces reais e soluções criadas para educação, eventos, operação e comunidades.</p></Reveal>

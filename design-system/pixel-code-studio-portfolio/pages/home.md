@@ -35,6 +35,7 @@
 - Hero: `BackgroundPaths` e `TextRotate` do catálogo 21st.dev, adaptados à marca.
 - Projetos: `Spotlight` do 21st.dev aplicado aos cards com imagens reais.
 - Faixa tecnológica: `Marquee` reutilizável do padrão publicado no 21st.dev.
+- Navegação: `BottomNavBar` fixa, com item ativo expansível, alvos de 44px e nomes próprios do portfólio.
 
 ---
 
@@ -44,6 +45,7 @@
 - TextRotate
 - Spotlight
 - Marquee
+- BottomNavBar
 
 ---
 
