@@ -11,6 +11,8 @@ Este portfólio usa componentes abertos encontrados no catálogo do [21st.dev](h
 
 O componente `bottom-nav-bar.tsx` foi integrado a partir do código fornecido para o projeto, com textos em português, destinos reais, acompanhamento automático da seção ativa, foco visível e migração do import para `motion/react`.
 
+O componente `info-card.tsx` foi integrado a partir do código fornecido para o projeto e adaptado ao grid real do portfólio. A adaptação preserva a borda cônica que acompanha o ponteiro e o destaque animado do título, acrescentando responsividade, imagens locais, foco por teclado e preferência de movimento reduzido.
+
 As animações usam [Motion](https://github.com/motiondivision/motion) por meio do pacote `motion` e de imports em `motion/react`.
 
 O sistema visual foi pesquisado com o [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), usando o perfil de portfólio criativo, estilo brutalista, composição assimétrica e movimento padrão. O resultado persistido está na pasta `design-system/pixel-code-studio-portfolio`.

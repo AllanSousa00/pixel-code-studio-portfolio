@@ -23,8 +23,8 @@ import {
 } from 'lucide-react'
 import BackgroundPaths from './components/ui/BackgroundPaths'
 import BottomNavBar from './components/ui/bottom-nav-bar'
+import { InfoCard } from './components/ui/info-card'
 import { Marquee } from './components/ui/Marquee'
-import { Spotlight } from './components/ui/Spotlight'
 import TextRotate from './components/ui/TextRotate'
 
 const TypedTextRotate = TextRotate as ComponentType<{
@@ -141,26 +141,40 @@ function Reveal({ children, className = '' }: { children: ReactNode; className?:
 }
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const accent = index % 2 === 0 ? 'var(--border-color-1)' : 'var(--border-color-2)'
+
   return (
-    <motion.article className={`project-card ${project.featured ? 'project-card--featured' : ''}`} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }} whileHover={{ y: -8 }} transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.2) }}>
-      <Spotlight className="project-spotlight" size={560} />
-      <a className="project-visual" href={project.live} target="_blank" rel="noreferrer" aria-label={`Abrir ${project.name}`}>
-        <img src={project.image} width="1440" height="900" loading="lazy" alt={`Interface real do projeto ${project.name}`} />
+    <motion.article className={`project-card ${project.featured ? 'project-card--featured' : ''}`} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }} whileHover={{ y: -7 }} transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.2) }}>
+      <a className="project-card-link" href={project.live} target="_blank" rel="noreferrer" aria-label={`Abrir ${project.name}`}>
+        <InfoCard
+          image={project.image}
+          imageAlt={`Interface real do projeto ${project.name}`}
+          title={project.name}
+          description={project.description}
+          borderColor={accent}
+          borderBgColor="var(--border-bg-color)"
+          cardBgColor="var(--card-bg-color)"
+          textColor="var(--text-color)"
+          hoverTextColor={index % 2 === 0 ? 'var(--hover-text-color-1)' : 'var(--hover-text-color-2)'}
+          patternColor1="var(--pattern-color1)"
+          patternColor2="var(--pattern-color2)"
+          effectBgColor={accent}
+          shadowColor={index % 2 === 0 ? 'rgba(199,255,56,.16)' : 'rgba(153,117,255,.2)'}
+        />
         <span className="project-index">{String(index + 1).padStart(2, '0')}</span>
         <span className="project-open"><ArrowUpRight aria-hidden="true" /></span>
       </a>
-      <div className="project-copy">
-        <div className="project-heading">
-          <div><p className="eyebrow">{project.kind}</p><h3>{project.name}</h3></div>
-          <div className="project-links">
-            {project.repo && <a href={project.repo} target="_blank" rel="noreferrer" aria-label={`Código de ${project.name}`}><GitFork aria-hidden="true" /></a>}
-            <a href={project.live} target="_blank" rel="noreferrer" aria-label={`Projeto ${project.name} ao vivo`}><ExternalLink aria-hidden="true" /></a>
-          </div>
+      <div className="project-meta">
+        <div>
+          <p className="eyebrow">{project.kind}</p>
+          <ul className="tag-list" aria-label="Tecnologias e características">
+            {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
+          </ul>
         </div>
-        <p>{project.description}</p>
-        <ul className="tag-list" aria-label="Tecnologias e características">
-          {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
-        </ul>
+        <div className="project-links">
+          {project.repo && <a href={project.repo} target="_blank" rel="noreferrer" aria-label={`Código de ${project.name}`}><GitFork aria-hidden="true" /></a>}
+          <a href={project.live} target="_blank" rel="noreferrer" aria-label={`Projeto ${project.name} ao vivo`}><ExternalLink aria-hidden="true" /></a>
+        </div>
       </div>
     </motion.article>
   )
