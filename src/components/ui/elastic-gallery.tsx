@@ -29,7 +29,7 @@ interface ElasticGalleryProps {
 }
 
 const AUTOPLAY_DELAY = 4800
-const CLOSE_DURATION = 360
+const CLOSE_DURATION = 520
 
 export function ElasticGallery({ items, className, defaultActiveId }: ElasticGalleryProps) {
   const [activeId, setActiveId] = useState<string | null>(defaultActiveId ?? items[0]?.id ?? null)
