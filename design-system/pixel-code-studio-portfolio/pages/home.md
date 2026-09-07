@@ -26,17 +26,24 @@
 
 ### Color Overrides
 
-- No overrides — use Master colors
+- Verde elétrico é reservado a CTAs, estados ativos e números de destaque.
+- Violeta aparece em profundidade, luz ambiente e metadados.
+- Fundos e cards permanecem escuros para sustentar o contraste editorial.
 
 ### Component Overrides
 
-- No overrides — use Master component specs
+- Hero: `BackgroundPaths` e `TextRotate` do catálogo 21st.dev, adaptados à marca.
+- Projetos: `Spotlight` do 21st.dev aplicado aos cards com imagens reais.
+- Faixa tecnológica: `Marquee` reutilizável do padrão publicado no 21st.dev.
 
 ---
 
 ## Page-Specific Components
 
-- No unique components for this page
+- BackgroundPaths
+- TextRotate
+- Spotlight
+- Marquee
 
 ---
 

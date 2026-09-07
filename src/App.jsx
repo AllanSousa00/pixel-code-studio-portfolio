@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   AnimatePresence,
   MotionConfig,
@@ -7,7 +7,7 @@ import {
   useScroll,
   useSpring,
   useTransform,
-} from 'framer-motion'
+} from 'motion/react'
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -24,6 +24,10 @@ import {
   X,
   Zap,
 } from 'lucide-react'
+import BackgroundPaths from './components/ui/BackgroundPaths'
+import { Marquee } from './components/ui/Marquee'
+import { Spotlight } from './components/ui/Spotlight'
+import TextRotate from './components/ui/TextRotate'
 
 const projects = [
   {
@@ -120,35 +124,10 @@ function Reveal({ children, className = '' }) {
   )
 }
 
-function BackgroundPaths() {
-  const paths = Array.from({ length: 12 }, (_, index) => ({
-    d: `M-${200 + index * 20},${80 + index * 22} C${160 + index * 30},${-60 + index * 14} ${520 + index * 20},${370 - index * 14} ${1280 + index * 40},${40 + index * 18}`,
-    opacity: 0.08 + index * 0.018,
-  }))
-
-  return (
-    <div className="path-field" aria-hidden="true">
-      <svg viewBox="0 0 1440 680" preserveAspectRatio="none">
-        {paths.map((path, index) => (
-          <motion.path key={path.d} d={path.d} fill="none" stroke="currentColor" strokeWidth="1" initial={{ pathLength: 0.05, opacity: 0 }} animate={{ pathLength: 1, opacity: path.opacity }} transition={{ duration: 2.4 + index * 0.08, delay: index * 0.04, ease: 'easeOut' }} />
-        ))}
-      </svg>
-    </div>
-  )
-}
-
 function ProjectCard({ project, index }) {
-  const cardRef = useRef(null)
-  const [spot, setSpot] = useState({ x: 50, y: 50 })
-
-  function updateSpotlight(event) {
-    const bounds = cardRef.current?.getBoundingClientRect()
-    if (!bounds) return
-    setSpot({ x: ((event.clientX - bounds.left) / bounds.width) * 100, y: ((event.clientY - bounds.top) / bounds.height) * 100 })
-  }
-
   return (
-    <motion.article ref={cardRef} className={`project-card ${project.featured ? 'project-card--featured' : ''}`} style={{ '--spot-x': `${spot.x}%`, '--spot-y': `${spot.y}%` }} onPointerMove={updateSpotlight} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }} whileHover={{ y: -8 }} transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.2) }}>
+    <motion.article className={`project-card ${project.featured ? 'project-card--featured' : ''}`} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }} whileHover={{ y: -8 }} transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.2) }}>
+      <Spotlight className="project-spotlight" size={560} />
       <a className="project-visual" href={project.live} target="_blank" rel="noreferrer" aria-label={`Abrir ${project.name}`}>
         <img src={project.image} width="1440" height="900" loading="lazy" alt={`Interface real do projeto ${project.name}`} />
         <span className="project-index">{String(index + 1).padStart(2, '0')}</span>
@@ -172,18 +151,11 @@ function ProjectCard({ project, index }) {
 }
 
 function App() {
-  const [wordIndex, setWordIndex] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
   const reduceMotion = useReducedMotion()
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 130, damping: 30, restDelta: 0.001 })
   const heroY = useTransform(scrollYProgress, [0, 0.3], [0, reduceMotion ? 0 : 110])
-
-  useEffect(() => {
-    if (reduceMotion) return undefined
-    const timer = window.setInterval(() => setWordIndex((current) => (current + 1) % rotatingWords.length), 2300)
-    return () => window.clearInterval(timer)
-  }, [reduceMotion])
 
   return (
     <MotionConfig reducedMotion="user">
@@ -208,7 +180,7 @@ function App() {
             <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75, delay: 0.1 }}>Ideias digitais<br />que saem do <em>óbvio.</em></motion.h1>
             <motion.div className="hero-bottom" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.45 }}>
               <p>Desenhamos e desenvolvemos</p>
-              <div className="rotating-line" aria-live="polite"><AnimatePresence mode="wait"><motion.strong key={rotatingWords[wordIndex]} initial={{ y: 26, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -26, opacity: 0 }} transition={{ duration: 0.32 }}>{rotatingWords[wordIndex]}</motion.strong></AnimatePresence></div>
+              <div className="rotating-line"><TextRotate texts={rotatingWords} as="strong" mainClassName="rotating-word" rotationInterval={2300} /></div>
               <p>com identidade e propósito.</p>
             </motion.div>
             <motion.div className="hero-actions" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}><a className="button button--primary" href="#projetos">Ver projetos <ArrowDownRight aria-hidden="true" /></a><a className="button button--ghost" href="https://github.com/AllanSousa00" target="_blank" rel="noreferrer"><GitFork aria-hidden="true" /> GitHub</a></motion.div>
@@ -217,7 +189,7 @@ function App() {
           <div className="hero-counter" aria-label="Sete experiências publicadas"><strong>07</strong><span>experiências<br />no ar</span></div>
         </section>
 
-        <div className="marquee" aria-label={`Tecnologias: ${technologies.join(', ')}`}><motion.div animate={reduceMotion ? {} : { x: ['0%', '-50%'] }} transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}>{[...technologies, ...technologies].map((technology, index) => <span key={`${technology}-${index}`}><Code2 aria-hidden="true" /> {technology}</span>)}</motion.div></div>
+        <Marquee className="marquee" speed="normal" label={`Tecnologias: ${technologies.join(', ')}`}>{technologies.map((technology) => <span key={technology}><Code2 aria-hidden="true" /> {technology}</span>)}</Marquee>
 
         <section className="section projects-section" id="projetos">
           <Reveal className="section-heading"><div><p className="kicker"><Sparkles aria-hidden="true" /> Trabalho selecionado</p><h2>Projetos reais.<br /><em>Resultados visíveis.</em></h2></div><p>Uma seleção de produtos publicados, com interfaces reais e soluções criadas para educação, eventos, operação e comunidades.</p></Reveal>

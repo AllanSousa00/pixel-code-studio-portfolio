@@ -19,24 +19,24 @@
 
 | Role | Hex | CSS Variable |
 |------|-----|--------------|
-| Primary | `#EC4899` | `--color-primary` |
-| On Primary | `#000000` | `--color-on-primary` |
-| Secondary | `#F472B6` | `--color-secondary` |
-| On Secondary | `#0F172A` | `--color-on-secondary` |
-| Accent/CTA | `#0891B2` | `--color-accent` |
-| On Accent/CTA | `#000000` | `--color-on-accent` |
-| Background | `#FDF2F8` | `--color-background` |
-| Foreground | `#831843` | `--color-foreground` |
-| Card | `#FFFFFF` | `--color-card` |
-| Card Foreground | `#831843` | `--color-card-foreground` |
-| Muted | `#F1EEF5` | `--color-muted` |
-| Muted Foreground | `#475569` | `--color-muted-foreground` |
-| Border | `#FBCFE8` | `--color-border` |
+| Primary | `#C7FF38` | `--color-primary` |
+| On Primary | `#080809` | `--color-on-primary` |
+| Secondary | `#9975FF` | `--color-secondary` |
+| On Secondary | `#080809` | `--color-on-secondary` |
+| Accent/CTA | `#F4F4EF` | `--color-accent` |
+| On Accent/CTA | `#080809` | `--color-on-accent` |
+| Background | `#080809` | `--color-background` |
+| Foreground | `#F4F4EF` | `--color-foreground` |
+| Card | `#101012` | `--color-card` |
+| Card Foreground | `#F4F4EF` | `--color-card-foreground` |
+| Muted | `#18181B` | `--color-muted` |
+| Muted Foreground | `#A4A4AA` | `--color-muted-foreground` |
+| Border | `#303035` | `--color-border` |
 | Destructive | `#DC2626` | `--color-destructive` |
 | On Destructive | `#FFFFFF` | `--color-on-destructive` |
-| Ring | `#EC4899` | `--color-ring` |
+| Ring | `#C7FF38` | `--color-ring` |
 
-**Color Notes:** Bold pink + cyan accent [Accent adjusted from #06B6D4]
+**Color Notes:** Paleta tecnológica escura com verde elétrico para conversão e violeta para profundidade. Adaptação do resultado do gerador ao briefing visual da marca.
 
 ### Typography
 
@@ -82,10 +82,10 @@
 ```css
 /* Primary Button */
 .btn-primary {
-  background: #0891B2;
-  color: white;
+  background: #C7FF38;
+  color: #080809;
   padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: 0;
   font-weight: 600;
   transition: all 200ms ease;
   cursor: pointer;
@@ -99,10 +99,10 @@
 /* Secondary Button */
 .btn-secondary {
   background: transparent;
-  color: #EC4899;
-  border: 2px solid #EC4899;
+  color: #F4F4EF;
+  border: 1px solid #303035;
   padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: 0;
   font-weight: 600;
   transition: all 200ms ease;
   cursor: pointer;
@@ -113,8 +113,9 @@
 
 ```css
 .card {
-  background: #FDF2F8;
-  border-radius: 12px;
+  background: #101012;
+  border: 1px solid #303035;
+  border-radius: 0;
   padding: 24px;
   box-shadow: var(--shadow-md);
   transition: all 200ms ease;
@@ -133,15 +134,15 @@
 .input {
   padding: 12px 16px;
   border: 1px solid #E2E8F0;
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 16px;
   transition: border-color 200ms ease;
 }
 
 .input:focus {
-  border-color: #EC4899;
+  border-color: #C7FF38;
   outline: none;
-  box-shadow: 0 0 0 3px #EC489920;
+  box-shadow: 0 0 0 3px #C7FF3820;
 }
 ```
 
@@ -154,8 +155,9 @@
 }
 
 .modal {
-  background: white;
-  border-radius: 16px;
+  background: #101012;
+  border: 1px solid #303035;
+  border-radius: 0;
   padding: 32px;
   box-shadow: var(--shadow-xl);
   max-width: 500px;
