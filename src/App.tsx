@@ -27,6 +27,7 @@ import BottomNavBar from './components/ui/bottom-nav-bar'
 import { ElasticGallery } from './components/ui/elastic-gallery'
 import { GitHubLogo } from './components/ui/github-logo'
 import { Marquee } from './components/ui/Marquee'
+import SiteFooter from './components/ui/footer'
 import TextRotate from './components/ui/TextRotate'
 
 const TypedTextRotate = TextRotate as ComponentType<{
@@ -210,12 +211,7 @@ function App() {
         </section>
       </main>
 
-      <footer>
-        <a className="brand brand--footer" href="#inicio"><span className="brand-mark" aria-hidden="true"><span>P</span></span><span>Pixel Code<br /><strong>Studio</strong></span></a>
-        <p>Sites, sistemas e experiências digitais com personalidade.</p>
-        <div><a href="https://github.com/AllanSousa00" target="_blank" rel="noreferrer"><GitHubLogo /> GitHub</a><a href={contactLink}>Contato <ArrowUpRight aria-hidden="true" /></a><a href="#inicio">Voltar ao topo <ArrowUpRight aria-hidden="true" /></a></div>
-        <small>© 2026 Pixel Code Studio · Desenvolvido por Allan Sousa</small>
-      </footer>
+      <SiteFooter />
     </MotionConfig>
   )
 }

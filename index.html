@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR" class="dark">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -12,6 +12,16 @@
     <meta property="og:url" content="https://pixel-code-studio-portfolio.pages.dev/" />
     <meta property="og:image" content="https://pixel-code-studio-portfolio.pages.dev/projects/vertice-enem.webp" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('pixel-code-theme')
+        const theme = savedTheme === 'light' || savedTheme === 'dark'
+          ? savedTheme
+          : matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        document.documentElement.dataset.theme = theme
+        document.documentElement.style.colorScheme = theme
+      } catch {}
+    </script>
     <title>Pixel Code Studio — Portfólio</title>
   </head>
   <body>
