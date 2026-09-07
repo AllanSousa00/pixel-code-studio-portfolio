@@ -200,7 +200,11 @@ em { color: var(--lime); font-weight: inherit; font-style: normal; }
 .elastic-gallery__item.is-active .elastic-gallery__inactive-content { opacity: 0; transform: scale(.7); }
 .elastic-gallery__vertical-title { color: #fff; font: 700 16px/1 var(--display); text-transform: uppercase; letter-spacing: .1em; writing-mode: vertical-rl; }
 .elastic-gallery__mobile-id { display: none; }
-.elastic-gallery__hint { margin: 16px 0 0; color: #77777d; font-size: 10px; text-align: right; text-transform: uppercase; letter-spacing: .14em; }
+.elastic-gallery__footer { min-height: 44px; display: flex; align-items: center; justify-content: flex-end; gap: 14px; margin-top: 10px; }
+.elastic-gallery__hint { margin: 0; color: #77777d; font-size: 10px; text-align: right; text-transform: uppercase; letter-spacing: .14em; }
+.elastic-gallery__footer button { min-height: 36px; display: inline-flex; align-items: center; gap: 7px; padding: 0 11px; border: 1px solid var(--line); background: transparent; color: #c7c7cb; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; cursor: pointer; transition: border-color .2s ease, color .2s ease, background .2s ease; }
+.elastic-gallery__footer button:hover { border-color: var(--lime); background: rgba(199,255,56,.08); color: var(--lime); }
+.elastic-gallery__footer button svg { width: 14px; height: 14px; }
 
 .services-section { background: var(--lime); color: var(--black); }
 .services-inner { display: grid; grid-template-columns: .82fr 1.18fr; gap: 80px; padding-block: 130px; }
@@ -292,7 +296,8 @@ footer small { grid-column: 1 / -1; align-self: end; padding-top: 34px; border-t
   .elastic-gallery__item.is-active .elastic-gallery__inactive-content { transform: translateY(-50%) scale(.7); }
   .elastic-gallery__vertical-title { display: none; }
   .elastic-gallery__mobile-id { display: block; overflow: hidden; color: #fff; font: 700 11px/1 var(--display); text-overflow: ellipsis; text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
-  .elastic-gallery__hint { text-align: left; line-height: 1.5; }
+  .elastic-gallery__footer { align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .elastic-gallery__hint { max-width: 215px; text-align: left; line-height: 1.5; }
   .services-inner { padding-block: 90px; }
   .services-list article { grid-template-columns: 30px 1fr; }
   .services-list article > svg { grid-column: 2; grid-row: 1; }

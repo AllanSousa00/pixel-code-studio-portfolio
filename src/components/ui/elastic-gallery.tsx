@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from 'react'
-import { ArrowUpRight, GitFork } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { ArrowUpRight, GitFork, Pause, Play } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
@@ -23,8 +23,24 @@ interface ElasticGalleryProps {
   defaultActiveId?: string
 }
 
+const AUTOPLAY_DELAY = 4800
+
 export function ElasticGallery({ items, className, defaultActiveId }: ElasticGalleryProps) {
   const [activeId, setActiveId] = useState(defaultActiveId ?? items[0]?.id ?? null)
+  const [paused, setPaused] = useState(false)
+
+  useEffect(() => {
+    if (paused || items.length < 2) return
+
+    const timeout = window.setTimeout(() => {
+      setActiveId((currentId) => {
+        const currentIndex = items.findIndex((item) => item.id === currentId)
+        return items[(currentIndex + 1 + items.length) % items.length]?.id ?? null
+      })
+    }, AUTOPLAY_DELAY)
+
+    return () => window.clearTimeout(timeout)
+  }, [activeId, items, paused])
 
   const activateFromPointer = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== 'touch') return
@@ -102,7 +118,13 @@ export function ElasticGallery({ items, className, defaultActiveId }: ElasticGal
           )
         })}
       </div>
-      <p className="elastic-gallery__hint">Passe o ponteiro ou deslize sobre os projetos para explorar.</p>
+      <div className="elastic-gallery__footer">
+        <p className="elastic-gallery__hint">A galeria avança sozinha. Passe o ponteiro ou deslize para escolher.</p>
+        <button type="button" onClick={() => setPaused((current) => !current)} aria-label={paused ? 'Continuar apresentação automática' : 'Pausar apresentação automática'}>
+          {paused ? <Play aria-hidden="true" /> : <Pause aria-hidden="true" />}
+          {paused ? 'Continuar' : 'Pausar'}
+        </button>
+      </div>
     </div>
   )
 }
