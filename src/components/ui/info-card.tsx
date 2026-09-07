@@ -119,7 +119,7 @@ export const InfoCard: React.FC<InfoCardProps> = ({
           width: '100%',
           height: '100%',
           borderRadius: 'calc(1em - 4px)',
-          background: cardBgColor,
+          backgroundColor: cardBgColor,
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
