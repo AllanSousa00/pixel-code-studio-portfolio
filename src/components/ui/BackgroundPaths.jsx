@@ -75,9 +75,9 @@ export default memo(function BackgroundPaths() {
       <svg fill="none" preserveAspectRatio="xMidYMid slice" viewBox="-2400 -800 4800 1600">
         <defs>
           <linearGradient id="pixel-path-gradient" x1="0%" x2="100%" y1="0%" y2="0%">
-            <stop offset="0%" stopColor="#c7ff38" stopOpacity="0.72" />
-            <stop offset="52%" stopColor="#f4f4ef" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#9975ff" stopOpacity="0.72" />
+            <stop offset="0%" stopColor="var(--lime)" stopOpacity="0.72" />
+            <stop offset="52%" stopColor="currentColor" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="var(--violet)" stopOpacity="0.72" />
           </linearGradient>
         </defs>
         <FloatingPaths position={1} />
