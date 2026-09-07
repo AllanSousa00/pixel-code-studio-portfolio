@@ -2,11 +2,13 @@
 
 import { useEffect, useState, type ReactNode } from "react"
 import { ArrowUp, Mail, Moon, Sun } from "lucide-react"
-import { InstagramIcon, LinkedInIcon, WhatsAppIcon, YouTubeIcon } from "@/components/ui/social-brand-icons"
+import { DiscordIcon, InstagramIcon, LinkedInIcon, WhatsAppIcon, YouTubeIcon } from "@/components/ui/social-brand-icons"
 
 type Theme = "dark" | "light"
 
 const contactLink = "mailto:allancruzsousa519@gmail.com?subject=Quero%20criar%20um%20projeto%20com%20a%20Pixel%20Code%20Studio"
+const whatsappLink = import.meta.env.VITE_WHATSAPP_URL?.trim() || "https://wa.me/5583996309727?text=Ol%C3%A1%21%20Encontrei%20a%20Pixel%20Code%20Studio%20pelo%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
+const discordLink = import.meta.env.VITE_DISCORD_URL?.trim() || "https://discord.gg/n8fzg8KFV5"
 
 const navigation = [
   {
@@ -16,6 +18,7 @@ const navigation = [
       { label: "Projetos", href: "#projetos" },
       { label: "Serviços", href: "#servicos" },
       { label: "Processo", href: "#processo" },
+      { label: "Contato", href: "#contato" },
     ],
   },
   {
@@ -30,7 +33,7 @@ const navigation = [
   {
     title: "Contato",
     links: [
-      { label: "Solicitar orçamento", href: contactLink },
+      { label: "Começar uma conversa", href: "#contato" },
       { label: "Enviar um e-mail", href: contactLink },
       { label: "LinkedIn", href: "https://www.linkedin.com/in/allan-da-cruz-sousa-a068903bb/", external: true },
       { label: "GitHub", href: "https://github.com/AllanSousa00", external: true },
@@ -39,7 +42,8 @@ const navigation = [
 ]
 
 const optionalSocials: Array<{ label: string; href?: string; icon: ReactNode }> = [
-  { label: "WhatsApp", href: import.meta.env.VITE_WHATSAPP_URL, icon: <WhatsAppIcon aria-hidden="true" /> },
+  { label: "WhatsApp", href: whatsappLink, icon: <WhatsAppIcon aria-hidden="true" /> },
+  { label: "Discord", href: discordLink, icon: <DiscordIcon aria-hidden="true" /> },
   { label: "Instagram", href: import.meta.env.VITE_INSTAGRAM_URL, icon: <InstagramIcon aria-hidden="true" /> },
   { label: "YouTube", href: import.meta.env.VITE_YOUTUBE_URL, icon: <YouTubeIcon aria-hidden="true" /> },
 ]

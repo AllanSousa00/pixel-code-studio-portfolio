@@ -275,6 +275,29 @@ em { color: var(--accent-text); font-weight: inherit; font-style: normal; }
 .cta-symbol span:nth-child(3) { bottom: 8%; left: 50%; transform: translateX(-50%) rotate(180deg); }
 .cta-symbol span:nth-child(4) { left: 5%; top: 50%; transform: rotate(-90deg); }
 
+.contact-section { grid-template-columns: minmax(0, .9fr) minmax(460px, .78fr); }
+.contact-copy { max-width: 700px; }
+.contact-copy > p:not(.kicker) { max-width: 580px; }
+.contact-email { min-height: 54px; }
+.contact-panel { position: relative; z-index: 1; width: 100%; padding: 18px; border: 1px solid rgba(255,255,255,.28); border-radius: 24px; background: rgba(8,8,9,.9); color: #fff; box-shadow: 0 30px 80px rgba(22,10,54,.3); backdrop-filter: blur(18px); }
+.contact-panel__heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; padding: 10px 10px 20px; }
+.contact-panel__heading span { color: #aaaab0; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .15em; }
+.contact-panel__heading strong { font: 700 20px/1 var(--display); letter-spacing: -.03em; }
+.contact-options { display: grid; gap: 10px; }
+.contact-option { min-height: 126px; display: grid; grid-template-columns: 58px 1fr auto; align-items: center; gap: 18px; padding: 18px; border: 1px solid rgba(255,255,255,.14); border-radius: 16px; background: rgba(255,255,255,.045); color: #fff; text-decoration: none; transition: transform .25s ease, border-color .25s ease, background .25s ease; }
+a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.38); background: rgba(255,255,255,.09); }
+.contact-option__icon { width: 58px; height: 58px; display: grid; place-items: center; border-radius: 16px; }
+.contact-option__icon svg { width: 28px; height: 28px; }
+.contact-option--whatsapp .contact-option__icon { background: #25d366; color: #06190d; }
+.contact-option--discord .contact-option__icon { background: #5865f2; color: #fff; }
+.contact-option__copy { display: grid; gap: 8px; }
+.contact-option__copy strong { font: 700 22px/1 var(--display); }
+.contact-option__copy small { max-width: 330px; color: #bdbdc3; font-size: 12px; line-height: 1.45; }
+.contact-option > svg { width: 22px; height: 22px; color: var(--lime); }
+.contact-option.is-unavailable { opacity: .62; }
+.contact-option__status { color: #aaaab0; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
+.contact-panel__note { margin: 18px 10px 6px; color: #8d8d94; font-size: 11px; line-height: 1.5; }
+
 .site-footer { width: min(1240px, calc(100% - 48px)); margin: 0 auto; padding: 76px 0 42px; }
 .site-footer__intro { display: grid; grid-template-columns: auto minmax(260px, 1fr) auto; align-items: center; gap: clamp(32px, 6vw, 90px); padding-bottom: 48px; }
 .brand--footer { align-self: center; }
@@ -333,6 +356,7 @@ em { color: var(--accent-text); font-weight: inherit; font-style: normal; }
   .services-inner { gap: 55px; }
   .process-grid { grid-template-columns: repeat(2, 1fr); }
   .cta-section { grid-template-columns: 1fr .45fr; gap: 30px; }
+  .contact-section { grid-template-columns: minmax(0, .8fr) minmax(420px, 1.2fr); }
   .cta-symbol { width: 230px; }
   .site-footer__intro { grid-template-columns: auto 1fr; }
   .site-footer__cta { grid-column: 1 / -1; width: fit-content; }
@@ -374,6 +398,13 @@ em { color: var(--accent-text); font-weight: inherit; font-style: normal; }
   .process-grid { grid-template-columns: 1fr; }
   .process-grid article { min-height: 240px; }
   .cta-section { min-height: 690px; grid-template-columns: 1fr; padding-block: 80px; }
+  .contact-section { grid-template-columns: 1fr; gap: 48px; }
+  .contact-panel { padding: 12px; border-radius: 20px; }
+  .contact-panel__heading { align-items: start; flex-direction: column; gap: 9px; }
+  .contact-option { min-height: 116px; grid-template-columns: 52px 1fr; gap: 14px; padding: 15px; }
+  .contact-option__icon { width: 52px; height: 52px; border-radius: 14px; }
+  .contact-option__copy strong { font-size: 20px; }
+  .contact-option > svg, .contact-option__status { grid-column: 2; }
   .cta-symbol { position: absolute; opacity: .18; right: -80px; bottom: -60px; width: 300px; }
   .site-footer { width: calc(100% - 32px); padding-top: 58px; }
   .site-footer__intro { grid-template-columns: 1fr; gap: 24px; }

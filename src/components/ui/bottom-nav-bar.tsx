@@ -28,7 +28,7 @@ const navItems: NavItem[] = [
   { label: "Serviços", icon: WandSparkles, href: "#servicos", sectionId: "servicos" },
   { label: "Processo", icon: Route, href: "#processo", sectionId: "processo" },
   { label: "GitHub", githubLogo: true, href: "https://github.com/AllanSousa00" },
-  { label: "Contato", icon: Mail, href: "mailto:allancruzsousa519@gmail.com?subject=Quero%20criar%20um%20projeto%20com%20a%20Pixel%20Code%20Studio" },
+  { label: "Contato", icon: Mail, href: "#contato", sectionId: "contato" },
 ]
 
 const MOBILE_LABEL_WIDTH = 72
