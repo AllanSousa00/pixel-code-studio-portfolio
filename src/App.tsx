@@ -14,15 +14,18 @@ import {
   Braces,
   Check,
   Code2,
-  GitFork,
+  Compass,
   Layers3,
   MousePointer2,
+  Palette,
+  Rocket,
   Sparkles,
   Zap,
 } from 'lucide-react'
 import BackgroundPaths from './components/ui/BackgroundPaths'
 import BottomNavBar from './components/ui/bottom-nav-bar'
 import { ElasticGallery } from './components/ui/elastic-gallery'
+import { GitHubLogo } from './components/ui/github-logo'
 import { Marquee } from './components/ui/Marquee'
 import TextRotate from './components/ui/TextRotate'
 
@@ -112,10 +115,10 @@ const services = [
 ]
 
 const process = [
-  ['01', 'Direção', 'Entendemos o objetivo, o público e o que precisa acontecer depois que alguém acessa o produto.'],
-  ['02', 'Sistema visual', 'Criamos linguagem, hierarquia e interações que tornam o projeto reconhecível e fácil de usar.'],
-  ['03', 'Construção', 'Desenvolvemos em ciclos curtos, validando responsividade, conteúdo e os fluxos mais importantes.'],
-  ['04', 'Lançamento', 'Publicamos, testamos em produção e deixamos uma base preparada para evolução e manutenção.'],
+  { icon: Compass, number: '01', title: 'Direção', text: 'Entendemos o objetivo, o público e o que precisa acontecer depois que alguém acessa o produto.' },
+  { icon: Palette, number: '02', title: 'Sistema visual', text: 'Criamos linguagem, hierarquia e interações que tornam o projeto reconhecível e fácil de usar.' },
+  { icon: Code2, number: '03', title: 'Construção', text: 'Desenvolvemos em ciclos curtos, validando responsividade, conteúdo e os fluxos mais importantes.' },
+  { icon: Rocket, number: '04', title: 'Lançamento', text: 'Publicamos, testamos em produção e deixamos uma base preparada para evolução e manutenção.' },
 ]
 
 const technologies = ['Pixel Code Studio', 'Sites sob medida', 'Plataformas web', 'Bots e automações', 'Experiências para jogos', 'Design com identidade', 'Projetos reais']
@@ -145,9 +148,7 @@ function App() {
     <MotionConfig reducedMotion="user">
       <motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />
       <header className="site-header">
-        <a className="brand" href="#inicio" aria-label="Pixel Code Studio — início"><span className="brand-mark" aria-hidden="true"><span>P</span></span><span>Pixel Code<br /><strong>Studio</strong></span></a>
         <BottomNavBar className="top-nav" />
-        <a className="header-cta" href={contactLink}><span>Vamos criar</span> <ArrowUpRight aria-hidden="true" /></a>
       </header>
 
       <main>
@@ -163,7 +164,7 @@ function App() {
               <div className="rotating-line"><TypedTextRotate texts={rotatingWords} as="strong" mainClassName="rotating-word" rotationInterval={2300} /></div>
               <p>com identidade e propósito.</p>
             </motion.div>
-            <motion.div className="hero-actions" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}><a className="button button--primary" href="#projetos">Ver projetos <ArrowDownRight aria-hidden="true" /></a><a className="button button--ghost" href="https://github.com/AllanSousa00" target="_blank" rel="noreferrer"><GitFork aria-hidden="true" /> GitHub</a></motion.div>
+            <motion.div className="hero-actions" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}><a className="button button--primary" href="#projetos">Ver projetos <ArrowDownRight aria-hidden="true" /></a><a className="button button--ghost" href="https://github.com/AllanSousa00" target="_blank" rel="noreferrer"><GitHubLogo /> GitHub</a></motion.div>
           </motion.div>
           <div className="hero-side-note" aria-hidden="true"><MousePointer2 /> Scroll para explorar</div>
           <div className="hero-counter" aria-label="Sete experiências publicadas"><strong>07</strong><span>experiências<br />no ar</span></div>
@@ -199,7 +200,7 @@ function App() {
 
         <section className="section process-section" id="processo">
           <Reveal className="section-heading process-heading"><div><p className="kicker"><Check aria-hidden="true" /> Como acontece</p><h2>Um processo simples.<br /><em>Um resultado marcante.</em></h2></div><p>Visibilidade em cada etapa, decisões explicadas e espaço para ajustar o que realmente importa.</p></Reveal>
-          <div className="process-grid">{process.map(([number, title, text], index) => <motion.article key={title} initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.09 }}><span>{number}</span><h3>{title}</h3><p>{text}</p></motion.article>)}</div>
+          <div className="process-grid">{process.map(({ icon: Icon, number, title, text }, index) => <motion.article key={title} initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: index * 0.09 }}><span>{number}</span><motion.div className="process-icon" animate={reduceMotion ? {} : { y: [0, -6, 0], rotate: [0, 4, 0, -4, 0] }} transition={{ duration: 4 + index * 0.35, repeat: Infinity, ease: 'easeInOut' }}><Icon aria-hidden="true" /></motion.div><h3>{title}</h3><p>{text}</p></motion.article>)}</div>
         </section>
 
         <section className="cta-section" id="contato">
@@ -212,7 +213,7 @@ function App() {
       <footer>
         <a className="brand brand--footer" href="#inicio"><span className="brand-mark" aria-hidden="true"><span>P</span></span><span>Pixel Code<br /><strong>Studio</strong></span></a>
         <p>Sites, sistemas e experiências digitais com personalidade.</p>
-        <div><a href="https://github.com/AllanSousa00" target="_blank" rel="noreferrer"><GitFork aria-hidden="true" /> GitHub</a><a href={contactLink}>Contato <ArrowUpRight aria-hidden="true" /></a><a href="#inicio">Voltar ao topo <ArrowUpRight aria-hidden="true" /></a></div>
+        <div><a href="https://github.com/AllanSousa00" target="_blank" rel="noreferrer"><GitHubLogo /> GitHub</a><a href={contactLink}>Contato <ArrowUpRight aria-hidden="true" /></a><a href="#inicio">Voltar ao topo <ArrowUpRight aria-hidden="true" /></a></div>
         <small>© 2026 Pixel Code Studio · Desenvolvido por Allan Sousa</small>
       </footer>
     </MotionConfig>

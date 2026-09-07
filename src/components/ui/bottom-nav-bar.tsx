@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { motion } from "motion/react"
 import {
   BriefcaseBusiness,
-  GitFork,
   House,
   Mail,
   Route,
@@ -13,10 +12,12 @@ import {
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { GitHubLogo } from "@/components/ui/github-logo"
 
 type NavItem = {
   label: string
-  icon: LucideIcon
+  icon?: LucideIcon
+  githubLogo?: boolean
   href: string
   sectionId?: string
 }
@@ -26,7 +27,7 @@ const navItems: NavItem[] = [
   { label: "Projetos", icon: BriefcaseBusiness, href: "#projetos", sectionId: "projetos" },
   { label: "Serviços", icon: WandSparkles, href: "#servicos", sectionId: "servicos" },
   { label: "Processo", icon: Route, href: "#processo", sectionId: "processo" },
-  { label: "GitHub", icon: GitFork, href: "https://github.com/AllanSousa00" },
+  { label: "GitHub", githubLogo: true, href: "https://github.com/AllanSousa00" },
   { label: "Contato", icon: Mail, href: "mailto:allancruzsousa519@gmail.com?subject=Quero%20criar%20um%20projeto%20com%20a%20Pixel%20Code%20Studio" },
 ]
 
@@ -105,7 +106,9 @@ export function BottomNavBar({
             aria-current={isActive && item.sectionId ? "page" : undefined}
             type="button"
           >
-            <Icon size={20} strokeWidth={2} aria-hidden className="shrink-0 transition-colors duration-200" />
+            {item.githubLogo
+              ? <GitHubLogo size={20} className="shrink-0 transition-colors duration-200" />
+              : Icon && <Icon size={20} strokeWidth={2} aria-hidden className="shrink-0 transition-colors duration-200" />}
 
             <motion.span
               initial={false}
