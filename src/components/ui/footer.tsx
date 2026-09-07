@@ -91,8 +91,15 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer__intro">
         <a className="brand brand--footer" href="#inicio" aria-label="Pixel Code Studio — início">
-          <span className="brand-mark" aria-hidden="true"><span>P</span></span>
-          <span>Pixel Code<br /><strong>Studio</strong></span>
+          <img
+            className="brand-logo"
+            src={theme === "light" ? "/brand/logo-light.webp" : "/brand/logo-dark.webp"}
+            alt=""
+            width="609"
+            height="136"
+            loading="lazy"
+            decoding="async"
+          />
         </a>
         <p>
           Transformamos ideias em sites, plataformas e automações com identidade própria,
