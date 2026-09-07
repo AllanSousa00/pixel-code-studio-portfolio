@@ -1,6 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Roboto+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/archivo-latin-variable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/space-grotesk-latin-variable.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -40,8 +55,6 @@
   --bg-card: #101011;
   --text-main: #f8f8f2;
   --text-secondary: #a3a3a8;
-  --font-family: 'Roboto Mono', monospace;
-  --rtl-font-family: 'Montserrat', sans-serif;
   --ink: #f8f8f2;
   --paper: #080809;
   --panel: #101011;

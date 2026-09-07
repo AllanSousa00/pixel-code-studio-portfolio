@@ -44,6 +44,9 @@ type Project = {
   kind: string
   description: string
   image: string
+  imageSmall: string
+  imageWidth: number
+  imageHeight: number
   live: string
   repo?: string
   tags: string[]
@@ -55,6 +58,9 @@ const projects: Project[] = [
     kind: 'Plataforma educacional',
     description: 'Biblioteca editorial de repertórios socioculturais, com busca, autenticação e uma experiência pensada para transformar referência em argumento.',
     image: '/projects/vertice-enem.webp',
+    imageSmall: '/projects/vertice-enem-720.webp',
+    imageWidth: 1440,
+    imageHeight: 1835,
     live: 'https://vertice-enem.contato-repertoryd.workers.dev',
     tags: ['React', 'TypeScript', 'Cloudflare'],
   },
@@ -63,6 +69,9 @@ const projects: Project[] = [
     kind: 'Jogo educacional ao vivo',
     description: 'Experiência para sala de aula com partidas individuais e ao vivo, códigos de acesso e conteúdo sobre as três gerações modernistas.',
     image: '/projects/conexoes-modernistas.webp',
+    imageSmall: '/projects/conexoes-modernistas-720.webp',
+    imageWidth: 1280,
+    imageHeight: 980,
     live: 'https://conexoes-modernistas.contato-repertoryd.workers.dev',
     tags: ['React', 'Multiplayer', 'UX educacional'],
   },
@@ -71,6 +80,9 @@ const projects: Project[] = [
     kind: 'Portal de evento',
     description: 'Portal completo para evento escolar, reunindo programação, inscrições, galeria, atendimento e conteúdo institucional em uma só experiência.',
     image: '/projects/simitec.webp',
+    imageSmall: '/projects/simitec-720.webp',
+    imageWidth: 1280,
+    imageHeight: 5503,
     live: 'https://simitec-ofc.pages.dev',
     tags: ['JavaScript', 'Design editorial', 'Cloudflare Pages'],
   },
@@ -79,6 +91,9 @@ const projects: Project[] = [
     kind: 'Produto digital',
     description: 'Plataforma de estudo com catálogo de filmes e séries, repertórios por eixo temático, redações, simulados e área autenticada.',
     image: '/projects/repertoryd.webp',
+    imageSmall: '/projects/repertoryd-720.webp',
+    imageWidth: 1280,
+    imageHeight: 720,
     live: 'https://repertoryd.pages.dev',
     tags: ['JavaScript', 'Autenticação', 'Plataforma'],
   },
@@ -87,6 +102,9 @@ const projects: Project[] = [
     kind: 'Hub de jogos',
     description: 'Hub responsivo que organiza quiz e trilha de habilidades em experiências independentes, rápidas e preparadas para uso educacional.',
     image: '/projects/portugues-em-jogos.webp',
+    imageSmall: '/projects/portugues-em-jogos-720.webp',
+    imageWidth: 1280,
+    imageHeight: 720,
     live: 'https://portugues-em-jogos.pages.dev',
     repo: 'https://github.com/AllanSousa00/Jogos-de-L-ngua-Portuguesa',
     tags: ['JavaScript', 'Gamificação', 'Responsivo'],
@@ -96,6 +114,9 @@ const projects: Project[] = [
     kind: 'Fluxo operacional',
     description: 'Formulário em etapas para receber solicitações de direitos de uso, organizar dados e conduzir cada pedido para análise.',
     image: '/projects/site-de-pedidos.webp',
+    imageSmall: '/projects/site-de-pedidos-720.webp',
+    imageWidth: 1280,
+    imageHeight: 1184,
     live: 'https://site-de-pedidos-pt.pages.dev',
     tags: ['Formulários', 'Integração', 'Automação'],
   },
@@ -104,6 +125,9 @@ const projects: Project[] = [
     kind: 'Sistema de solicitações',
     description: 'Experiência acessível para pedidos de uso de software, com fluxo progressivo, finalidade detalhada e contato centralizado.',
     image: '/projects/portal-direitos.webp',
+    imageSmall: '/projects/portal-direitos-720.webp',
+    imageWidth: 1280,
+    imageHeight: 1264,
     live: 'https://portal-de-direitos-calculadora.pages.dev',
     repo: 'https://github.com/AllanSousa00/Calculadora',
     tags: ['HTML', 'JavaScript', 'UX de formulário'],
@@ -204,6 +228,10 @@ function App() {
                 category: project.kind,
                 description: project.description,
                 src: project.image,
+                srcCompact: project.image.replace(/\.webp$/, '-480.webp'),
+                srcSmall: project.imageSmall,
+                width: project.imageWidth,
+                height: project.imageHeight,
                 alt: `Interface real do projeto ${project.name}`,
                 href: project.live,
                 repo: project.repo,

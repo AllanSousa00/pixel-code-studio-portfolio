@@ -11,6 +11,10 @@ export interface ElasticGalleryItem {
   category: string
   description: string
   src: string
+  srcCompact: string
+  srcSmall: string
+  width: number
+  height: number
   alt: string
   href: string
   repo?: string
@@ -81,10 +85,13 @@ export function ElasticGallery({ items, className, defaultActiveId }: ElasticGal
               <div className="elastic-gallery__media">
                 <img
                   src={item.src}
+                  srcSet={`${item.srcCompact} 480w, ${item.srcSmall} 720w, ${item.src} ${item.width}w`}
+                  sizes="(max-width: 700px) calc(100vw - 32px), 70vw"
                   alt={item.alt}
-                  width="1440"
-                  height="900"
+                  width={item.width}
+                  height={item.height}
                   loading={active ? 'eager' : 'lazy'}
+                  decoding="async"
                 />
                 <div className="elastic-gallery__overlay" aria-hidden="true" />
               </div>
