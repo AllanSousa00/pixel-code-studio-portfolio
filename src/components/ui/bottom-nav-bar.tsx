@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { motion } from "motion/react"
+import { useEffect, useRef, useState } from "react"
+import { motion, useReducedMotion } from "motion/react"
 import {
   BriefcaseBusiness,
   House,
@@ -43,6 +43,26 @@ export function BottomNavBar({
   defaultIndex = 0,
 }: BottomNavBarProps) {
   const [activeIndex, setActiveIndex] = useState(defaultIndex)
+  const prefersReducedMotion = useReducedMotion()
+  const scrollFrame = useRef<number | null>(null)
+  const navigatingTo = useRef<number | null>(null)
+
+  function stopScrollAnimation() {
+    if (scrollFrame.current !== null) cancelAnimationFrame(scrollFrame.current)
+    scrollFrame.current = null
+    navigatingTo.current = null
+  }
+
+  useEffect(() => {
+    window.addEventListener("wheel", stopScrollAnimation, { passive: true })
+    window.addEventListener("touchstart", stopScrollAnimation, { passive: true })
+
+    return () => {
+      stopScrollAnimation()
+      window.removeEventListener("wheel", stopScrollAnimation)
+      window.removeEventListener("touchstart", stopScrollAnimation)
+    }
+  }, [])
 
   useEffect(() => {
     const visibleSections = navItems
@@ -51,6 +71,8 @@ export function BottomNavBar({
 
     const observer = new IntersectionObserver(
       (entries) => {
+        if (navigatingTo.current !== null) return
+
         const visible = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
@@ -64,10 +86,51 @@ export function BottomNavBar({
     return () => observer.disconnect()
   }, [])
 
+  function scrollToSection(element: HTMLElement, href: string, index: number) {
+    stopScrollAnimation()
+    navigatingTo.current = index
+
+    const startY = window.scrollY
+    const headerOffset = 92
+    const targetY = Math.max(0, element.getBoundingClientRect().top + startY - headerOffset)
+    const distance = targetY - startY
+
+    if (window.location.hash !== href) window.history.pushState(null, "", href)
+
+    if (prefersReducedMotion || Math.abs(distance) < 2) {
+      window.scrollTo(0, targetY)
+      navigatingTo.current = null
+      return
+    }
+
+    const duration = Math.min(1400, Math.max(760, Math.abs(distance) * 0.3))
+    let startedAt: number | null = null
+
+    const move = (now: number) => {
+      startedAt ??= now
+      const progress = Math.min((now - startedAt) / duration, 1)
+      const eased = progress < 0.5
+        ? 4 * progress ** 3
+        : 1 - (-2 * progress + 2) ** 3 / 2
+
+      window.scrollTo(0, startY + distance * eased)
+
+      if (progress < 1) {
+        scrollFrame.current = requestAnimationFrame(move)
+      } else {
+        scrollFrame.current = null
+        navigatingTo.current = null
+      }
+    }
+
+    scrollFrame.current = requestAnimationFrame(move)
+  }
+
   function selectItem(item: NavItem, index: number) {
     setActiveIndex(index)
     if (item.sectionId) {
-      document.getElementById(item.sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" })
+      const section = document.getElementById(item.sectionId)
+      if (section) scrollToSection(section, item.href, index)
       return
     }
     if (item.href.startsWith("mailto:")) window.location.assign(item.href)
