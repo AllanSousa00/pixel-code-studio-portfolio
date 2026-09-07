@@ -9,6 +9,7 @@ type Theme = "dark" | "light"
 const contactLink = "mailto:allancruzsousa519@gmail.com?subject=Quero%20criar%20um%20projeto%20com%20a%20Pixel%20Code%20Studio"
 const whatsappLink = import.meta.env.VITE_WHATSAPP_URL?.trim() || "https://wa.me/5583996309727?text=Ol%C3%A1%21%20Encontrei%20a%20Pixel%20Code%20Studio%20pelo%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto."
 const discordLink = import.meta.env.VITE_DISCORD_URL?.trim() || "https://discord.gg/n8fzg8KFV5"
+const youtubeLink = import.meta.env.VITE_YOUTUBE_URL?.trim() || "https://www.youtube.com/channel/UCS7H6p65cZb3YR7E3qXZDew"
 
 const navigation = [
   {
@@ -45,7 +46,7 @@ const optionalSocials: Array<{ label: string; href?: string; icon: ReactNode }> 
   { label: "WhatsApp", href: whatsappLink, icon: <WhatsAppIcon aria-hidden="true" /> },
   { label: "Discord", href: discordLink, icon: <DiscordIcon aria-hidden="true" /> },
   { label: "Instagram", href: import.meta.env.VITE_INSTAGRAM_URL, icon: <InstagramIcon aria-hidden="true" /> },
-  { label: "YouTube", href: import.meta.env.VITE_YOUTUBE_URL, icon: <YouTubeIcon aria-hidden="true" /> },
+  { label: "YouTube", href: youtubeLink, icon: <YouTubeIcon aria-hidden="true" /> },
 ]
 
 const socialLinks: Array<{ label: string; href: string; icon: ReactNode }> = [
