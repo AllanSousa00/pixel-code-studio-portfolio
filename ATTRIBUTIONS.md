@@ -11,7 +11,7 @@ Este portfólio usa componentes abertos encontrados no catálogo do [21st.dev](h
 
 O componente `bottom-nav-bar.tsx` foi integrado a partir do código fornecido para o projeto, com textos em português, destinos reais, acompanhamento automático da seção ativa, foco visível e migração do import para `motion/react`.
 
-O componente `info-card.tsx` foi integrado a partir do código fornecido para o projeto e adaptado ao grid real do portfólio. A adaptação preserva a borda cônica que acompanha o ponteiro e o destaque animado do título, acrescentando responsividade, imagens locais, foco por teclado e preferência de movimento reduzido.
+Os componentes `info-card.tsx` e `elastic-gallery.tsx` foram integrados a partir dos códigos fornecidos para o projeto. A galeria atual preserva o efeito de acordeão do exemplo, troca `next/image` pela imagem nativa compatível com Vite e acrescenta conteúdo real, toque, teclado e links dos projetos.
 
 As animações usam [Motion](https://github.com/motiondivision/motion) por meio do pacote `motion` e de imports em `motion/react`.
 

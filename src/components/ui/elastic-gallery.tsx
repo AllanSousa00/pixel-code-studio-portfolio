@@ -1,0 +1,110 @@
+"use client"
+
+import { useState } from 'react'
+import { ArrowUpRight, GitFork } from 'lucide-react'
+
+import { cn } from '@/lib/utils'
+
+export interface ElasticGalleryItem {
+  id: string
+  title: string
+  category: string
+  description: string
+  src: string
+  alt: string
+  href: string
+  repo?: string
+  tags: string[]
+}
+
+interface ElasticGalleryProps {
+  items: ElasticGalleryItem[]
+  className?: string
+  defaultActiveId?: string
+}
+
+export function ElasticGallery({ items, className, defaultActiveId }: ElasticGalleryProps) {
+  const [activeId, setActiveId] = useState(defaultActiveId ?? items[0]?.id ?? null)
+
+  const activateFromPointer = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== 'touch') return
+
+    const target = document.elementFromPoint(event.clientX, event.clientY)
+    const item = target?.closest<HTMLElement>('[data-gallery-id]')
+    if (item?.dataset.galleryId) setActiveId(item.dataset.galleryId)
+  }
+
+  return (
+    <div
+      className={cn('elastic-gallery', className)}
+      onPointerMove={activateFromPointer}
+      aria-label="Galeria de projetos publicados"
+    >
+      <div className="elastic-gallery__track">
+        {items.map((item) => {
+          const active = activeId === item.id
+
+          return (
+            <article
+              key={item.id}
+              data-gallery-id={item.id}
+              className={cn('elastic-gallery__item', active ? 'is-active' : 'is-inactive')}
+              onPointerEnter={() => setActiveId(item.id)}
+              onPointerDown={() => setActiveId(item.id)}
+              onFocus={() => setActiveId(item.id)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  setActiveId(item.id)
+                }
+              }}
+              tabIndex={0}
+              aria-expanded={active}
+              aria-label={`${item.id}. ${item.title}`}
+            >
+              <div className="elastic-gallery__media">
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  width="1440"
+                  height="900"
+                  loading={active ? 'eager' : 'lazy'}
+                />
+                <div className="elastic-gallery__overlay" aria-hidden="true" />
+              </div>
+
+              <div className="elastic-gallery__content">
+                <div className="elastic-gallery__active-content" aria-hidden={!active}>
+                  <span className="elastic-gallery__category">{item.category}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <ul aria-label="Tecnologias e características">
+                    {item.tags.map((tag) => <li key={tag}>{tag}</li>)}
+                  </ul>
+                  <div className="elastic-gallery__actions">
+                    <a href={item.href} target="_blank" rel="noreferrer" tabIndex={active ? 0 : -1} aria-label={`Ver projeto ${item.title}`}>
+                      Ver projeto <ArrowUpRight aria-hidden="true" />
+                    </a>
+                    {item.repo && (
+                      <a className="elastic-gallery__repo" href={item.repo} target="_blank" rel="noreferrer" tabIndex={active ? 0 : -1} aria-label={`Ver código de ${item.title}`}>
+                        <GitFork aria-hidden="true" /> Código
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                <div className="elastic-gallery__inactive-content" aria-hidden={active}>
+                  <span className="elastic-gallery__vertical-title">{item.title}</span>
+                  <span className="elastic-gallery__mobile-id">{item.id} · {item.title}</span>
+                </div>
+              </div>
+            </article>
+          )
+        })}
+      </div>
+      <p className="elastic-gallery__hint">Passe o ponteiro ou deslize sobre os projetos para explorar.</p>
+    </div>
+  )
+}
+
+export default ElasticGallery

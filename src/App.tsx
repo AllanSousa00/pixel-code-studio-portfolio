@@ -14,7 +14,6 @@ import {
   Braces,
   Check,
   Code2,
-  ExternalLink,
   GitFork,
   Layers3,
   MousePointer2,
@@ -23,7 +22,7 @@ import {
 } from 'lucide-react'
 import BackgroundPaths from './components/ui/BackgroundPaths'
 import BottomNavBar from './components/ui/bottom-nav-bar'
-import { InfoCard } from './components/ui/info-card'
+import { ElasticGallery } from './components/ui/elastic-gallery'
 import { Marquee } from './components/ui/Marquee'
 import TextRotate from './components/ui/TextRotate'
 
@@ -42,7 +41,6 @@ type Project = {
   live: string
   repo?: string
   tags: string[]
-  featured?: boolean
 }
 
 const projects: Project[] = [
@@ -53,7 +51,6 @@ const projects: Project[] = [
     image: '/projects/vertice-enem.webp',
     live: 'https://vertice-enem.contato-repertoryd.workers.dev',
     tags: ['React', 'TypeScript', 'Cloudflare'],
-    featured: true,
   },
   {
     name: 'Conexões Modernistas',
@@ -62,7 +59,6 @@ const projects: Project[] = [
     image: '/projects/conexoes-modernistas.webp',
     live: 'https://conexoes-modernistas.contato-repertoryd.workers.dev',
     tags: ['React', 'Multiplayer', 'UX educacional'],
-    featured: true,
   },
   {
     name: 'SIMITEC 2026',
@@ -71,7 +67,6 @@ const projects: Project[] = [
     image: '/projects/simitec.webp',
     live: 'https://simitec-ofc.pages.dev',
     tags: ['JavaScript', 'Design editorial', 'Cloudflare Pages'],
-    featured: true,
   },
   {
     name: 'Repertoryd',
@@ -140,46 +135,6 @@ function Reveal({ children, className = '' }: { children: ReactNode; className?:
   )
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const accent = index % 2 === 0 ? 'var(--border-color-1)' : 'var(--border-color-2)'
-
-  return (
-    <motion.article className={`project-card ${project.featured ? 'project-card--featured' : ''}`} variants={reveal} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }} whileHover={{ y: -7 }} transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.2) }}>
-      <a className="project-card-link" href={project.live} target="_blank" rel="noreferrer" aria-label={`Abrir ${project.name}`}>
-        <InfoCard
-          image={project.image}
-          imageAlt={`Interface real do projeto ${project.name}`}
-          title={project.name}
-          description={project.description}
-          borderColor={accent}
-          borderBgColor="var(--border-bg-color)"
-          cardBgColor="var(--card-bg-color)"
-          textColor="var(--text-color)"
-          hoverTextColor={index % 2 === 0 ? 'var(--hover-text-color-1)' : 'var(--hover-text-color-2)'}
-          patternColor1="var(--pattern-color1)"
-          patternColor2="var(--pattern-color2)"
-          effectBgColor={accent}
-          shadowColor={index % 2 === 0 ? 'rgba(199,255,56,.16)' : 'rgba(153,117,255,.2)'}
-        />
-        <span className="project-index">{String(index + 1).padStart(2, '0')}</span>
-        <span className="project-open"><ArrowUpRight aria-hidden="true" /></span>
-      </a>
-      <div className="project-meta">
-        <div>
-          <p className="eyebrow">{project.kind}</p>
-          <ul className="tag-list" aria-label="Tecnologias e características">
-            {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
-          </ul>
-        </div>
-        <div className="project-links">
-          {project.repo && <a href={project.repo} target="_blank" rel="noreferrer" aria-label={`Código de ${project.name}`}><GitFork aria-hidden="true" /></a>}
-          <a href={project.live} target="_blank" rel="noreferrer" aria-label={`Projeto ${project.name} ao vivo`}><ExternalLink aria-hidden="true" /></a>
-        </div>
-      </div>
-    </motion.article>
-  )
-}
-
 function App() {
   const reduceMotion = useReducedMotion()
   const { scrollYProgress } = useScroll()
@@ -218,7 +173,21 @@ function App() {
 
         <section className="section projects-section" id="projetos">
           <Reveal className="section-heading"><div><p className="kicker"><Sparkles aria-hidden="true" /> Trabalho selecionado</p><h2>Projetos reais.<br /><em>Resultados visíveis.</em></h2></div><p>Uma seleção de produtos publicados, com interfaces reais e soluções criadas para educação, eventos, operação e comunidades.</p></Reveal>
-          <div className="projects-grid">{projects.map((project, index) => <ProjectCard key={project.name} project={project} index={index} />)}</div>
+          <Reveal>
+            <ElasticGallery
+              items={projects.map((project, index) => ({
+                id: String(index + 1).padStart(2, '0'),
+                title: project.name,
+                category: project.kind,
+                description: project.description,
+                src: project.image,
+                alt: `Interface real do projeto ${project.name}`,
+                href: project.live,
+                repo: project.repo,
+                tags: project.tags,
+              }))}
+            />
+          </Reveal>
         </section>
 
         <section className="services-section" id="servicos">
