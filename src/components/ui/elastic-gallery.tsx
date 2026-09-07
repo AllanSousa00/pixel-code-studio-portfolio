@@ -1,7 +1,8 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, GitFork, Pause, Play } from 'lucide-react'
+import { useReducedMotion } from 'motion/react'
 
 import { cn } from '@/lib/utils'
 
@@ -28,37 +29,70 @@ interface ElasticGalleryProps {
 }
 
 const AUTOPLAY_DELAY = 4800
+const CLOSE_DURATION = 360
 
 export function ElasticGallery({ items, className, defaultActiveId }: ElasticGalleryProps) {
-  const [activeId, setActiveId] = useState(defaultActiveId ?? items[0]?.id ?? null)
+  const [activeId, setActiveId] = useState<string | null>(defaultActiveId ?? items[0]?.id ?? null)
   const [paused, setPaused] = useState(false)
+  const [switching, setSwitching] = useState(false)
+  const reduceMotion = useReducedMotion()
+  const switchTimer = useRef<number | null>(null)
+  const pendingId = useRef<string | null>(null)
+
+  const switchTo = useCallback((nextId: string) => {
+    if (!nextId || (nextId === activeId && !switching) || pendingId.current === nextId) return
+
+    if (switchTimer.current !== null) window.clearTimeout(switchTimer.current)
+
+    if (reduceMotion) {
+      pendingId.current = null
+      setSwitching(false)
+      setActiveId(nextId)
+      return
+    }
+
+    pendingId.current = nextId
+    setSwitching(true)
+    setActiveId(null)
+
+    switchTimer.current = window.setTimeout(() => {
+      setActiveId(nextId)
+      setSwitching(false)
+      pendingId.current = null
+      switchTimer.current = null
+    }, CLOSE_DURATION)
+  }, [activeId, reduceMotion, switching])
+
+  useEffect(() => () => {
+    if (switchTimer.current !== null) window.clearTimeout(switchTimer.current)
+  }, [])
 
   useEffect(() => {
-    if (paused || items.length < 2) return
+    if (paused || switching || !activeId || items.length < 2) return
 
     const timeout = window.setTimeout(() => {
-      setActiveId((currentId) => {
-        const currentIndex = items.findIndex((item) => item.id === currentId)
-        return items[(currentIndex + 1 + items.length) % items.length]?.id ?? null
-      })
+      const currentIndex = items.findIndex((item) => item.id === activeId)
+      const nextId = items[(currentIndex + 1 + items.length) % items.length]?.id
+      if (nextId) switchTo(nextId)
     }, AUTOPLAY_DELAY)
 
     return () => window.clearTimeout(timeout)
-  }, [activeId, items, paused])
+  }, [activeId, items, paused, switchTo, switching])
 
   const activateFromPointer = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== 'touch') return
 
     const target = document.elementFromPoint(event.clientX, event.clientY)
     const item = target?.closest<HTMLElement>('[data-gallery-id]')
-    if (item?.dataset.galleryId) setActiveId(item.dataset.galleryId)
+    if (item?.dataset.galleryId) switchTo(item.dataset.galleryId)
   }
 
   return (
     <div
-      className={cn('elastic-gallery', className)}
+      className={cn('elastic-gallery', switching && 'is-switching', className)}
       onPointerMove={activateFromPointer}
       aria-label="Galeria de projetos publicados"
+      aria-busy={switching}
     >
       <div className="elastic-gallery__track">
         {items.map((item) => {
@@ -69,13 +103,13 @@ export function ElasticGallery({ items, className, defaultActiveId }: ElasticGal
               key={item.id}
               data-gallery-id={item.id}
               className={cn('elastic-gallery__item', active ? 'is-active' : 'is-inactive')}
-              onPointerEnter={() => setActiveId(item.id)}
-              onPointerDown={() => setActiveId(item.id)}
-              onFocus={() => setActiveId(item.id)}
+              onPointerEnter={() => switchTo(item.id)}
+              onPointerDown={() => switchTo(item.id)}
+              onFocus={() => switchTo(item.id)}
               onKeyDown={(event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
                   event.preventDefault()
-                  setActiveId(item.id)
+                  switchTo(item.id)
                 }
               }}
               tabIndex={0}
