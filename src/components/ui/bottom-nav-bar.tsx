@@ -35,13 +35,11 @@ const MOBILE_LABEL_WIDTH = 72
 type BottomNavBarProps = {
   className?: string
   defaultIndex?: number
-  stickyBottom?: boolean
 }
 
 export function BottomNavBar({
   className,
   defaultIndex = 0,
-  stickyBottom = false,
 }: BottomNavBarProps) {
   const [activeIndex, setActiveIndex] = useState(defaultIndex)
 
@@ -77,14 +75,13 @@ export function BottomNavBar({
 
   return (
     <motion.nav
-      initial={{ scale: 0.9, opacity: 0, y: 18 }}
+      initial={{ scale: 0.9, opacity: 0, y: -18 }}
       animate={{ scale: 1, opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 26, delay: 0.5 }}
       role="navigation"
       aria-label="Navegação rápida"
       className={cn(
         "bg-card/90 dark:bg-card/90 border border-border rounded-full flex items-center p-1.5 shadow-2xl space-x-1 min-w-[320px] max-w-[calc(100vw-20px)] h-[58px] backdrop-blur-xl",
-        stickyBottom && "fixed inset-x-0 bottom-4 mx-auto z-[70] w-fit",
         className,
       )}
     >

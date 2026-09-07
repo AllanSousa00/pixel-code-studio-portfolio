@@ -9,7 +9,7 @@ Este portfólio usa componentes abertos encontrados no catálogo do [21st.dev](h
 | `Spotlight.jsx` | [Spotlight — Julien Thibeaut](https://21st.dev/@ibelick/components/spotlight) | [Motion Primitives](https://github.com/ibelick/motion-primitives) | MIT |
 | `Marquee.jsx` | [Marquee — Ali Imam](https://21st.dev/@designali-in/components/marquee) | API pública do componente | Conforme publicação do autor |
 
-O componente `bottom-nav-bar.tsx` foi integrado a partir do código fornecido para o projeto, com textos em português, destinos reais, acompanhamento automático da seção ativa, foco visível e migração do import para `motion/react`.
+O componente `bottom-nav-bar.tsx` foi integrado a partir do código fornecido para o projeto, com textos em português, destinos reais, acompanhamento automático da seção ativa, foco visível, posição no cabeçalho e migração do import para `motion/react`.
 
 Os componentes `info-card.tsx` e `elastic-gallery.tsx` foram integrados a partir dos códigos fornecidos para o projeto. A galeria atual preserva o efeito de acordeão do exemplo, troca `next/image` pela imagem nativa compatível com Vite e acrescenta conteúdo real, toque, teclado e links dos projetos.
 

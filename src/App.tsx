@@ -146,9 +146,9 @@ function App() {
       <motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Pixel Code Studio — início"><span className="brand-mark" aria-hidden="true"><span>P</span></span><span>Pixel Code<br /><strong>Studio</strong></span></a>
+        <BottomNavBar className="top-nav" />
         <a className="header-cta" href={contactLink}><span>Vamos criar</span> <ArrowUpRight aria-hidden="true" /></a>
       </header>
-      <BottomNavBar stickyBottom />
 
       <main>
         <section className="hero-section" id="inicio">
