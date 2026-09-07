@@ -231,18 +231,12 @@ function App() {
           <Reveal className="contact-panel">
             <div className="contact-panel__heading"><span>Começar a conversar</span><strong>Escolha um canal</strong></div>
             <div className="contact-options">
-              {conversationChannels.map(({ name, description, href, icon: Icon, modifier }) => href ? (
+              {conversationChannels.map(({ name, description, href, icon: Icon, modifier }) => (
                 <a className={`contact-option contact-option--${modifier}`} href={href} target="_blank" rel="noreferrer" key={name}>
                   <span className="contact-option__icon"><Icon aria-hidden="true" /></span>
                   <span className="contact-option__copy"><strong>{name}</strong><small>{description}</small></span>
                   <ArrowUpRight aria-hidden="true" />
                 </a>
-              ) : (
-                <div className={`contact-option contact-option--${modifier} is-unavailable`} aria-disabled="true" key={name}>
-                  <span className="contact-option__icon"><Icon aria-hidden="true" /></span>
-                  <span className="contact-option__copy"><strong>{name}</strong><small>{description}</small></span>
-                  <span className="contact-option__status">Link pendente</span>
-                </div>
               ))}
             </div>
             <p className="contact-panel__note">Para explicar uma ideia com mais detalhes, o e-mail continua sendo o melhor caminho.</p>

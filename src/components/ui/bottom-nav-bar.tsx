@@ -65,6 +65,22 @@ export function BottomNavBar({
   }, [])
 
   useEffect(() => {
+    const sectionId = decodeURIComponent(window.location.hash.slice(1))
+    const index = navItems.findIndex((item) => item.sectionId === sectionId)
+    if (index < 0) return
+
+    const frame = requestAnimationFrame(() => {
+      const section = document.getElementById(sectionId)
+      if (!section) return
+
+      setActiveIndex(index)
+      window.scrollTo(0, Math.max(0, section.getBoundingClientRect().top + window.scrollY - 92))
+    })
+
+    return () => cancelAnimationFrame(frame)
+  }, [])
+
+  useEffect(() => {
     const visibleSections = navItems
       .map((item, index) => ({ element: item.sectionId ? document.getElementById(item.sectionId) : null, index }))
       .filter((entry): entry is { element: HTMLElement; index: number } => Boolean(entry.element))

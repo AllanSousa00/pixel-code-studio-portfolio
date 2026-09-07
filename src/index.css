@@ -294,8 +294,6 @@ a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255
 .contact-option__copy strong { font: 700 22px/1 var(--display); }
 .contact-option__copy small { max-width: 330px; color: #bdbdc3; font-size: 12px; line-height: 1.45; }
 .contact-option > svg { width: 22px; height: 22px; color: var(--lime); }
-.contact-option.is-unavailable { opacity: .62; }
-.contact-option__status { color: #aaaab0; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
 .contact-panel__note { margin: 18px 10px 6px; color: #8d8d94; font-size: 11px; line-height: 1.5; }
 
 .site-footer { width: min(1240px, calc(100% - 48px)); margin: 0 auto; padding: 76px 0 42px; }
@@ -404,7 +402,7 @@ a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255
   .contact-option { min-height: 116px; grid-template-columns: 52px 1fr; gap: 14px; padding: 15px; }
   .contact-option__icon { width: 52px; height: 52px; border-radius: 14px; }
   .contact-option__copy strong { font-size: 20px; }
-  .contact-option > svg, .contact-option__status { grid-column: 2; }
+  .contact-option > svg { grid-column: 2; }
   .cta-symbol { position: absolute; opacity: .18; right: -80px; bottom: -60px; width: 300px; }
   .site-footer { width: calc(100% - 32px); padding-top: 58px; }
   .site-footer__intro { grid-template-columns: 1fr; gap: 24px; }
