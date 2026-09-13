@@ -34,6 +34,9 @@ test('rotas públicas e metadados permanecem no shell atual', async () => {
   }
   assert.match(router, /function NotFoundPage/)
   assert.match(router, /function FaqSection\(\)/)
+  const navbar = await readFile(new URL('src/components/ui/bottom-nav-bar.tsx', root), 'utf8')
+  assert.match(navbar, /label: "Sobre mim"/)
+  assert.match(navbar, /UserRound/)
   const seo = await readFile(new URL('src/lib/seo.ts', root), 'utf8')
   assert.match(seo, /twitter:card/)
   assert.match(seo, /link\[rel="canonical"\]/)

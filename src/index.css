@@ -374,6 +374,8 @@ a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255
 @media (max-width: 680px) {
   .site-header { top: 10px; width: calc(100% - 20px); }
   .top-nav { width: fit-content; max-width: 100%; }
+  .top-nav > button { flex: 0 0 auto; min-width: 28px; padding-inline: 4px; }
+  .top-nav > button[aria-current="page"] { width: 108px; }
   .hero-section { min-height: 720px; padding: 125px 18px 90px; background-size: 44px 44px; }
   .hero-orb--lime { width: 60px; height: 60px; left: -10px; top: 27%; }
   .hero-orb--violet { width: 48px; height: 48px; right: 2%; bottom: 25%; }
@@ -427,6 +429,12 @@ a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+@media (max-width: 360px) {
+  .top-nav > button[aria-current="page"] { width: 96px; }
+  .top-nav > button[aria-current="page"] > span { max-width: 60px; }
+  .top-nav > button[aria-current="page"] > span > span { font-size: 11px; }
 }
 
 /* Áreas adicionadas: reutilizam os tokens e o ritmo do design aprovado. */

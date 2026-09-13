@@ -7,6 +7,7 @@ import {
   House,
   Mail,
   Route,
+  UserRound,
   WandSparkles,
   type LucideIcon,
 } from "lucide-react"
@@ -24,6 +25,7 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { label: "Início", icon: House, href: "#inicio", sectionId: "inicio" },
+  { label: "Sobre mim", icon: UserRound, href: "/sobre" },
   { label: "Projetos", icon: BriefcaseBusiness, href: "#projetos", sectionId: "projetos" },
   { label: "Serviços", icon: WandSparkles, href: "#servicos", sectionId: "servicos" },
   { label: "Processo", icon: Route, href: "#processo", sectionId: "processo" },
@@ -150,6 +152,10 @@ export function BottomNavBar({
       else window.location.assign(`/${item.href}`)
       return
     }
+    if (item.href.startsWith("/")) {
+      window.location.assign(item.href)
+      return
+    }
     if (item.href.startsWith("mailto:")) window.location.assign(item.href)
     else window.open(item.href, "_blank", "noopener,noreferrer")
   }
@@ -183,7 +189,7 @@ export function BottomNavBar({
             )}
             onClick={() => selectItem(item, idx)}
             aria-label={item.label}
-            aria-current={isActive && item.sectionId ? "page" : undefined}
+            aria-current={isActive ? "page" : undefined}
             type="button"
           >
             {item.githubLogo
@@ -202,7 +208,7 @@ export function BottomNavBar({
                 opacity: { duration: 0.19 },
                 marginLeft: { duration: 0.19 },
               }}
-              className="overflow-hidden flex items-center max-w-[72px]"
+              className="shrink-0 overflow-hidden flex items-center max-w-[72px]"
             >
               <span
                 className={cn(
