@@ -6,6 +6,6 @@
 - `public/_headers` mantém CSP, `frame-ancestors`, `object-src`, `form-action`, Referrer-Policy, Permissions-Policy, COOP e MIME sniffing protegido.
 - Imagens e scripts são locais; CSP não deve ser afrouxada sem necessidade documentada.
 - Links externos devem ser reais e verificáveis. Não inventar Instagram, avaliações, clientes, endereços ou integrações.
-- `robots.txt` e sitemap expõem apenas a página pública canônica; não registrar fragmentos de hash como rotas independentes.
+- `robots.txt` e sitemap expõem somente rotas públicas reais; não registrar fragmentos de hash como URLs independentes e manter `/obrigado` fora do índice.
 - Logs de CI e runtime não devem vazar segredos nem objetos gigantes.
 - Mudanças destrutivas em arquivos ou Git exigem escopo resolvido e preservação de trabalho do proprietário.

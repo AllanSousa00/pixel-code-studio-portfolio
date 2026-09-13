@@ -11,11 +11,11 @@ Estados permitidos: `PASS`, `FAIL`, `N/A`, `BLOCKED`. Severidades: `BLOCKER`, `C
 | MOT-01 | Motion com função e reduced motion | Frontend | MAJOR | CSS, Motion e browser | Parcial | Playwright | PASS |
 | A11Y-01 | Contraste, foco, teclado e labels | Acessibilidade | CRITICAL | Lighthouse + browser | Parcial | Lighthouse/Playwright | PASS |
 | MOB-01 | Sem overflow em mobile/tablet | Responsividade | CRITICAL | `scrollWidth` e screenshots | Sim | Playwright | PASS |
-| SEO-01 | Metas, canonical, OG, sitemap e robots da página única | SEO | MAJOR | HTML, sitemap e robots | Parcial | testes + browser | PASS |
+| SEO-01 | Metas, canonical, OG, sitemap e robots por rota | SEO | MAJOR | HTML, `src/lib/seo.ts`, sitemap e robots | Parcial | testes + browser | PASS |
 | SEC-01 | CSP e headers seguros | Segurança | BLOCKER | Ler `_headers`, request de preview/deploy | Sim | teste + curl | PASS |
 | SEC-02 | Sem segredo/dado sensível no bundle | Segurança | BLOCKER | rg/build | Parcial | rg + review | PASS |
 | TEST-01 | Lint/typecheck/test/build | Qualidade | BLOCKER | Executar scripts npm | Sim | npm | PASS |
-| TEST-02 | Fluxos reais no browser | Qualidade | MAJOR | Hero→galeria→serviços→processo→contato | Parcial | Playwright | PASS |
+| TEST-02 | Fluxos reais no browser | Qualidade | MAJOR | Home→projeto→case→contato→obrigado, filtros, breadcrumbs e 404 | Parcial | Playwright/CLI | PASS |
 | PERF-01 | LCP/CLS/bundle/imagens revisados | Performance | MAJOR | Lighthouse e auditoria | Parcial | Lighthouse | PASS |
 | CONTENT-01 | Sem métricas/depoimentos inventados | Conteúdo | BLOCKER | Revisar data/copy | Não | revisão | PASS |
 | CONTENT-02 | Foto/Instagram/Analytics ausentes ficam explícitos | Conteúdo | MAJOR | Revisar pendências | Não | revisão | PASS |

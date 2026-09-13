@@ -18,7 +18,7 @@ Repositórios e skills externos devem ser lidos, testados quando aplicável e re
 
 Não invente idade, experiência, clientes, empresas, métricas, resultados, depoimentos, foto, endereço, URL ou analytics. Use `TODO`, placeholder explícito ou pendência quando faltar informação. Cases devem comunicar problema, solução, execução e resultado sem números fabricados. Reviews vazias devem explicar que ainda não há depoimentos públicos verificados.
 
-O escopo atual é uma página única: ela deve manter navegação por âncoras, CTA, títulos/metas canônicos, Open Graph, sitemap, robots, alt text e CTA mobile. Páginas internas, 404, FAQ, breadcrumbs, privacidade e schema só entram quando houver conteúdo e uma rota real para sustentá-los. Analytics só pode ser ativado com ID real.
+O escopo atual combina a home editorial com rotas públicas reais para Sobre, projetos, serviços, contato, privacidade, confirmação e 404. Cada rota deve manter navegação acessível, títulos/metas canônicos, Open Graph, alt text e CTA quando fizer sentido. Analytics só pode ser ativado com ID real.
 
 ## Design e UX
 
@@ -26,7 +26,7 @@ O Design System Pixel é a fonte única: visual escuro ou claro legível, limpo,
 
 A interface importante define conscientemente `DESIGN_VARIANCE`, `MOTION_INTENSITY` e `VISUAL_DENSITY`. Para este portfólio: 7, 4 e 5. Motion serve a feedback, estado, hierarquia e continuidade; prefira transform/opacity e respeite `prefers-reduced-motion`. Informação essencial não depende só de hover. Alvos de toque ficam próximos de 44px e texto longo faz wrap/reflow.
 
-Phosphor Icons é a biblioteca primária. Marcas usam assets oficiais. Cada asset externo exige origem, licença, uso comercial, atribuição e registro.
+Lucide Icons é a biblioteca vigente do design aprovado. Marcas usam assets oficiais. Cada asset externo exige origem, licença, uso comercial, atribuição e registro.
 
 ## Engenharia e dados
 

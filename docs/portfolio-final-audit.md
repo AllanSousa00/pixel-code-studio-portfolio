@@ -1,11 +1,11 @@
 # Auditoria final — Portfólio Pixel Code Studio
 
 **Data:** 13 de setembro de 2026  
-**Escopo:** restauração do design anterior da página pública, mantendo os comportamentos solicitados.
+**Escopo:** preservação do design anterior da home com a adição das páginas e funções previstas no prompt.
 
 ## Resultado
 
-O visual anterior foi recuperado como referência vigente: navbar em pílula no topo, hero editorial com grade, marquee contínuo, galeria de projetos com troca automática e transição de saída/entrada, bloco de serviços, processo, contato e footer com redes e tema claro/escuro.
+O visual anterior foi recuperado como referência vigente na home e reutilizado nas rotas internas: navbar em pílula no topo, hero editorial com grade, marquee contínuo, galeria de projetos com troca automática e transição de saída/entrada, bloco de serviços, processo, contato e footer com redes e tema claro/escuro.
 
 ## Comportamentos preservados
 
@@ -16,12 +16,15 @@ O visual anterior foi recuperado como referência vigente: navbar em pílula no 
 - Footer com e-mail, LinkedIn, WhatsApp, Discord e YouTube; Instagram aparece apenas quando `VITE_INSTAGRAM_URL` for fornecida.
 - Tema claro e escuro com tokens próprios, contraste revisado e preferência persistida localmente.
 - Movimento reduzido desativa animações não essenciais e o autoplay da galeria.
+- Páginas públicas para Sobre, catálogo, detalhes/cases, serviços com FAQ, contato, privacidade, confirmação e 404.
+- Breadcrumbs discretos, títulos/metas por rota, sitemap, robots, alt text e Open Graph preservados sem inventar dados.
 
 ## Arquivos principais
 
 | Área | Arquivos |
 |---|---|
 | Entrada | `src/main.tsx`, `src/App.tsx` |
+| Rotas | `src/Router.tsx`, `src/lib/router.tsx`, `src/lib/seo.ts` |
 | UI | `src/components/ui/BackgroundPaths.jsx`, `bottom-nav-bar.tsx`, `elastic-gallery.tsx`, `footer.tsx`, `Marquee.jsx`, `TextRotate.jsx`, `social-brand-icons.tsx` |
 | Estilos | `src/index.css` |
 | Assets | `public/brand/*`, `public/projects/*`, `public/fonts/*` |
@@ -39,7 +42,7 @@ npm audit         PASS — sem vulnerabilidades de produção
 Playwright        PASS — desktop, tablet e mobile; sem overflow
 ```
 
-O preview foi conferido em 1440×900 e 390×844. A composição antiga permanece legível no tema claro, mantém a paleta escura original e conserva alvos de toque e foco visível. A galeria foi observada no estado inicial e durante a troca automática.
+O preview foi conferido em 1440×900 e 390×844. A composição antiga permanece legível no tema claro, mantém a paleta escura original e conserva alvos de toque e foco visível. A home e as rotas Sobre, Projetos, detalhe, Contato e 404 foram abertas diretamente sem alterar a linguagem visual.
 
 ## Limites honestos
 

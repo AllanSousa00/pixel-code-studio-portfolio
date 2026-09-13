@@ -1,3 +1,4 @@
+/* oxlint-disable react/only-export-components -- route pages share this verified catalog. */
 import type { ComponentType, ReactNode } from 'react'
 import {
   MotionConfig,
@@ -52,7 +53,7 @@ type Project = {
   tags: string[]
 }
 
-const projects: Project[] = [
+export const projects: Project[] = [
   {
     name: 'Vértice ENEM',
     kind: 'Plataforma educacional',
@@ -134,7 +135,7 @@ const projects: Project[] = [
   },
 ]
 
-const services = [
+export const services = [
   { icon: Layers3, number: '01', title: 'Sites que apresentam e vendem', text: 'Landing pages, portais e experiências institucionais com mensagem clara, identidade própria e navegação que leva à ação.' },
   { icon: Braces, number: '02', title: 'Plataformas sob medida', text: 'Produtos digitais com áreas autenticadas, catálogos, painéis, formulários, integrações e regras específicas para o seu negócio.' },
   { icon: Bot, number: '03', title: 'Bots e automações', text: 'Bots para Discord, WhatsApp e Telegram, além de fluxos que conectam atendimento, pedidos, pagamentos e operação.' },

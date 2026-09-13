@@ -2,7 +2,7 @@
 
 ## Produto
 
-Um portfólio público de página única para apresentar a Pixel Code Studio e Allan Sousa, com projetos reais publicados, serviços digitais, processo de trabalho e canais de contato.
+Um portfólio público para apresentar a Pixel Code Studio e Allan Sousa, com uma home editorial de visual anterior, páginas de Sobre, projetos, serviços, contato, privacidade, confirmação e 404.
 
 ## Público
 

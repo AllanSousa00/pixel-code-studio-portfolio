@@ -147,6 +147,7 @@ export function BottomNavBar({
     if (item.sectionId) {
       const section = document.getElementById(item.sectionId)
       if (section) scrollToSection(section, item.href, index)
+      else window.location.assign(`/${item.href}`)
       return
     }
     if (item.href.startsWith("mailto:")) window.location.assign(item.href)

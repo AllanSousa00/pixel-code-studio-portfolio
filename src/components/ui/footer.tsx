@@ -16,6 +16,7 @@ const navigation = [
     title: "Explore",
     links: [
       { label: "Início", href: "#inicio" },
+      { label: "Sobre", href: "/sobre" },
       { label: "Projetos", href: "#projetos" },
       { label: "Serviços", href: "#servicos" },
       { label: "Processo", href: "#processo" },
@@ -80,6 +81,7 @@ function ThemeToggle({ theme, onChange }: { theme: Theme; onChange: (theme: Them
 
 export function SiteFooter() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme)
+  const anchorPrefix = typeof window !== 'undefined' && window.location.pathname !== '/' ? '/' : ''
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -116,7 +118,7 @@ export function SiteFooter() {
             <ul>
               {group.links.map((link) => (
                 <li key={`${group.title}-${link.label}`}>
-                  <a href={link.href} {...(link.external ? { target: "_blank", rel: "noreferrer" } : {})}>{link.label}</a>
+                  <a href={link.href.startsWith('#') ? `${anchorPrefix}${link.href}` : link.href} {...(link.external ? { target: "_blank", rel: "noreferrer" } : {})}>{link.label}</a>
                 </li>
               ))}
             </ul>

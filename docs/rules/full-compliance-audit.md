@@ -34,14 +34,14 @@ O portfólio público está conforme para build e publicação. Não há P0/P1 a
 | Assets | PASS | Marca local, fontes locais, capturas reais e versões WebP; `alt` e `sizes` revisados |
 | Cloudflare | PASS | `_headers`, `_redirects`, `robots.txt`, sitemap e script `wrangler pages deploy` presentes |
 | Deploy | PASS | Build local aprovado; publicação configurada para o projeto Pages `pixel-code-studio-portfolio` |
-| SEO | PASS | Títulos/metas/canonical/OG/Twitter/JSON-LD, breadcrumbs, sitemap, robots e 404 |
-| Acessibilidade | PASS | Lighthouse 100; foco visível, menu por teclado, labels, contraste e reduced motion |
-| Performance | PASS | Lighthouse 93; FCP 2,3 s, LCP 2,8 s, TBT 50 ms, CLS 0,018, Speed Index 2,3 s |
+| SEO | PASS | Títulos/metas/canonical/OG/Twitter, breadcrumbs, sitemap, robots e 404 |
+| Acessibilidade | PASS | Foco visível, labels, contraste, navegação por teclado e reduced motion |
+| Performance | PASS | Imagens responsivas/lazy, bundle revisado e animações com `motion`; repetir Lighthouse após a publicação |
 | Segurança | PASS | CSP restritiva, `frame-ancestors`, `object-src`, referrer/permissions/COOP e sem secrets no frontend |
 | Documentação | PASS | `AGENTS.md`, `PRODUCT.md`, `DESIGN.md`, `docs/rules`, mapa de recursos e rotas |
 | Testes | PASS | lint, typecheck, testes Node, build, preview e fluxos Playwright |
 | Design | PASS | Tokens Pixel, anti-slop, dials 7/4/5, contraste claro/escuro e revisão visual |
-| Mobile | PASS | 390×844 sem overflow, CTA sticky seguro e menu acessível |
+| Mobile | PASS | 390×844 sem overflow, CTA existente preservado e navegação acessível |
 
 ## Evidências técnicas
 
@@ -54,7 +54,7 @@ O portfólio público está conforme para build e publicação. Não há P0/P1 a
 - `npm audit --omit=dev --audit-level=high`: 0 vulnerabilidades.
 - Preview e smoke test: rotas públicas e links reais responderam com HTTP 200.
 
-### Lighthouse — home em preview
+### Lighthouse — referência anterior
 
 | Categoria | Resultado |
 |---|---:|
@@ -63,11 +63,11 @@ O portfólio público está conforme para build e publicação. Não há P0/P1 a
 | Best Practices | 100 |
 | SEO | 100 |
 
-Métricas: FCP 2,3 s; LCP 2,8 s; Speed Index 2,3 s; TBT 50 ms; CLS 0,018. Os achados responsivos de imagem e contraste foram corrigidos antes desta auditoria.
+Essas métricas pertencem à rodada visual anterior e ficam registradas como referência. A implementação atual deve receber uma nova rodada Lighthouse depois da publicação; os checks locais de lint, typecheck, testes e build estão verdes.
 
 ### Browser
 
-Fluxos cobertos no Playwright/CLI: navegação interna sem reload, hash/scroll, menu mobile com Escape e focus trap, filtros de projetos, troca de tema, envio inválido do contato, fluxo Home → Projeto → Case → Contato → Obrigado, imagens carregadas após scroll e ausência de overflow em 768, 1024, 1366, 1440 e 1600px. Screenshots estão em `output/playwright/` localmente e a pasta permanece ignorada pelo Git.
+Fluxos cobertos no Playwright/CLI: navegação interna sem reload, hash/scroll da home, filtros de projetos, troca de tema, envio inválido do contato, fluxo Home → Projeto → Case → Contato → Obrigado, links externos, breadcrumb, 404 e ausência de overflow em 390, 768, 1024, 1366, 1440 e 1600px. Screenshots estão em `output/playwright/` localmente e a pasta permanece ignorada pelo Git.
 
 Chromium foi o engine executado no ambiente. Firefox e WebKit são recomendados para a próxima rodada quando estiverem instalados; isso não bloqueia a publicação porque o site usa APIs web padrão e a matriz de risco está registrada.
 
@@ -80,7 +80,7 @@ Após a auditoria, Firefox 155 e WebKit 26.6 foram instalados no ambiente e abri
 ## Design review
 
 **KEEP:** identidade lime/violeta, grade editorial, capturas reais, navegação curta, showcase com troca suave, copy direta e CTA mobile.  
-**FIX aplicado:** contraste do tema claro e textos quiet do tema escuro, altura/`sizes` das imagens, CLS inicial do footer, foco/escape do menu, seção do criador com fundo de contraste.  
+**FIX aplicado:** contraste do tema claro e textos quiet do tema escuro, altura/`sizes` das imagens, CLS inicial do footer, navegação interna, metadados por rota, seção do criador com fundo de contraste.
 **QUICK WINS:** adicionar foto real, Instagram e depoimentos autorizados quando o proprietário enviar; configurar analytics somente com ID real; repetir cross-browser.
 
 O detector Impeccable terminou sem findings primários. Os dois avisos restantes são deliberados: Space Grotesk é a fonte já definida para o portfólio e a grade editorial é parte da linguagem visual Pixel. A única recomendação de performance acionável (transição de `padding`) foi corrigida para `transform`.

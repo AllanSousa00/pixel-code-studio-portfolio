@@ -1,6 +1,6 @@
 # Pixel Code Studio — Portfólio
 
-Portfólio comercial de Allan Sousa e da Pixel Code Studio. A página única apresenta sete projetos reais publicados, serviços, processo de trabalho e canais de contato com o visual anterior da marca preservado.
+Portfólio comercial de Allan Sousa e da Pixel Code Studio. A home preserva o visual anterior da marca e o projeto também oferece Sobre, projetos, serviços, contato, privacidade, confirmação e 404.
 
 **Site publicado:** https://pixel-code-studio-portfolio.pages.dev
 
@@ -20,7 +20,7 @@ Portfólio comercial de Allan Sousa e da Pixel Code Studio. A página única apr
 - [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill): sistema visual pesquisado e persistido em `design-system/pixel-code-studio-portfolio`.
 - [Taste, Impeccable e Huashu Design](docs/rules/external-tools.md): lentes de revisão instaladas localmente e filtradas pela identidade Pixel.
 
-Os componentes de interface ficam em `src/components/ui`; a estrutura continua compatível com o alias e a configuração shadcn em `components.json`. Os estilos globais e tokens do Tailwind ficam em `src/index.css`.
+Os componentes de interface ficam em `src/components/ui`; as páginas e o roteador ficam em `src/Router.tsx` e `src/lib/router.tsx`. A estrutura continua compatível com o alias e a configuração shadcn em `components.json`. Os estilos globais e tokens do Tailwind ficam em `src/index.css`.
 
 ## Desenvolvimento
 

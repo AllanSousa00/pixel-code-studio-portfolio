@@ -4,11 +4,12 @@ import test from 'node:test'
 
 const root = new URL('../', import.meta.url)
 
-test('sitemap publica a única página canônica e exclui fluxos privados', async () => {
+test('sitemap publica rotas principais e exclui fluxos privados', async () => {
   const sitemap = await readFile(new URL('public/sitemap.xml', root), 'utf8')
-  assert.match(sitemap, /<loc>https:\/\/pixel-code-studio-portfolio\.pages\.dev\/</)
-  assert.doesNotMatch(sitemap, /<loc>[^<]+\/(?:sobre|servicos|projetos|contato|privacidade|cases)\b/)
-  assert.doesNotMatch(sitemap, /\/(?:admin|dashboard|auth|obrigado)</)
+  for (const path of ['/', '/sobre', '/servicos', '/projetos', '/contato', '/privacidade', '/cases/vertice-enem']) {
+    assert.match(sitemap, new RegExp(`<loc>https://pixel-code-studio-portfolio\\.pages\\.dev${path === '/' ? '/' : path}</loc>`))
+  }
+  assert.doesNotMatch(sitemap, /\/(?:admin|dashboard|auth|obrigado)/)
 })
 
 test('robots bloqueia áreas privadas e aponta para o sitemap', async () => {
@@ -24,4 +25,16 @@ test('headers incluem controles de segurança e fallback de SPA', async () => {
   assert.match(headers, /X-Content-Type-Options: nosniff/)
   assert.match(headers, /frame-ancestors 'none'/)
   assert.match(redirects, /\/\* \/index\.html 200/)
+})
+
+test('rotas públicas e metadados permanecem no shell atual', async () => {
+  const router = await readFile(new URL('src/Router.tsx', root), 'utf8')
+  for (const route of ['/sobre', '/projetos', '/servicos', '/contato', '/privacidade', '/obrigado']) {
+    assert.match(router, new RegExp(`'${route}'`))
+  }
+  assert.match(router, /function NotFoundPage/)
+  assert.match(router, /function FaqSection\(\)/)
+  const seo = await readFile(new URL('src/lib/seo.ts', root), 'utf8')
+  assert.match(seo, /twitter:card/)
+  assert.match(seo, /link\[rel="canonical"\]/)
 })
