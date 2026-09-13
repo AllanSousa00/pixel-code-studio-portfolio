@@ -18,7 +18,7 @@ Repositórios e skills externos devem ser lidos, testados quando aplicável e re
 
 Não invente idade, experiência, clientes, empresas, métricas, resultados, depoimentos, foto, endereço, URL ou analytics. Use `TODO`, placeholder explícito ou pendência quando faltar informação. Cases devem comunicar problema, solução, execução e resultado sem números fabricados. Reviews vazias devem explicar que ainda não há depoimentos públicos verificados.
 
-O site deve manter rotas amigáveis, 404, CTA, breadcrumbs, FAQ, página de obrigado, privacidade, títulos/metas únicos, Open Graph, sitemap, robots, alt text, schema real e CTA mobile. Analytics só pode ser ativado com ID real.
+O escopo atual é uma página única: ela deve manter navegação por âncoras, CTA, títulos/metas canônicos, Open Graph, sitemap, robots, alt text e CTA mobile. Páginas internas, 404, FAQ, breadcrumbs, privacidade e schema só entram quando houver conteúdo e uma rota real para sustentá-los. Analytics só pode ser ativado com ID real.
 
 ## Design e UX
 

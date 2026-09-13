@@ -4,11 +4,10 @@ import test from 'node:test'
 
 const root = new URL('../', import.meta.url)
 
-test('sitemap publica rotas principais e exclui fluxos privados', async () => {
+test('sitemap publica a única página canônica e exclui fluxos privados', async () => {
   const sitemap = await readFile(new URL('public/sitemap.xml', root), 'utf8')
-  for (const path of ['/', '/sobre', '/servicos', '/projetos', '/contato', '/privacidade', '/cases/vertice-enem']) {
-    assert.match(sitemap, new RegExp(`<loc>https://pixel-code-studio-portfolio\\.pages\\.dev${path === '/' ? '/' : path}</loc>`))
-  }
+  assert.match(sitemap, /<loc>https:\/\/pixel-code-studio-portfolio\.pages\.dev\/</)
+  assert.doesNotMatch(sitemap, /<loc>[^<]+\/(?:sobre|servicos|projetos|contato|privacidade|cases)\b/)
   assert.doesNotMatch(sitemap, /\/(?:admin|dashboard|auth|obrigado)</)
 })
 

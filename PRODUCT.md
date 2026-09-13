@@ -2,7 +2,7 @@
 
 ## Produto
 
-Um portfólio público para apresentar a Pixel Code Studio e Allan Sousa, com projetos reais publicados, serviços digitais, processo de trabalho, cases e canais de contato.
+Um portfólio público de página única para apresentar a Pixel Code Studio e Allan Sousa, com projetos reais publicados, serviços digitais, processo de trabalho e canais de contato.
 
 ## Público
 
@@ -19,7 +19,7 @@ O portfólio é uma SPA estática hospedada no Cloudflare Pages. O bot Discord e
 ## Restrições
 
 - Não inventar métricas, clientes, avaliações, foto, endereço, experiência, integrações ou URLs.
-- Usar as capturas e links reais registrados em `src/data/portfolio.ts`.
+- Usar as capturas e links reais registrados no catálogo editorial de `src/App.tsx`.
 - Manter tema claro legível, tema escuro da marca, navegação acessível e movimento reduzido.
 - Não reintroduzir as features privadas removidas de Perfil, Atividades ou Jogos e grupos/LFG.
 - Não incluir secrets, dados de pagamento, backend privado ou IDs do Discord no bundle.

@@ -22,7 +22,7 @@ Motion comunica entrada, mudança de estado, continuidade e feedback. O showcase
 
 ## Componentes e dados
 
-Header e footer são compartilhados; `FeaturedProjects`, `ProjectCard`, FAQ, cases e CTA usam a fonte única `src/data/portfolio.ts`. Phosphor Icons é a biblioteca primária. Imagens têm alt, `sizes` e versões locais responsivas.
+A página usa a navbar em pílula no topo, galeria elástica, marquee, serviços, processo, CTA de contato e footer. O catálogo editorial fica em `src/App.tsx`; os blocos visuais reutilizáveis ficam em `src/components/ui`. Lucide Icons é a biblioteca do design restaurado. Imagens têm alt, `sizes` e versões locais responsivas.
 
 ## Anti-patterns evitados
 

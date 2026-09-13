@@ -33,9 +33,9 @@ Para UI, navegue com Playwright em 390×844, 768×1024, 1440×900 e 1600×1100; 
 ## Decisões permanentes da Pixel
 
 - O Design System Pixel é a fonte final: escuro, limpo, tecnológico, quadrado, organizado e profissional; sem futurismo exagerado ou efeitos gratuitos.
-- Preserve dados e links reais dos sete projetos em `src/data/portfolio.ts`.
-- Phosphor Icons é a biblioteca primária; `motion` é a biblioteca de movimento; respeite `prefers-reduced-motion`.
-- Cases seguem problema → solução → execução → resultado, sem métricas inventadas.
+- Preserve os dados e links reais dos sete projetos no catálogo editorial de `src/App.tsx`.
+- Lucide Icons é a biblioteca visual usada pelo design anterior restaurado; `motion` controla o movimento. Respeite `prefers-reduced-motion`.
+- A página única organiza os projetos na galeria, os serviços, o processo e o contato sem criar cases ou métricas inventadas.
 - O contato usa canais reais e o formulário prepara e-mail; não prometa armazenamento ou backend inexistente.
 - A foto do criador, Instagram, analytics e depoimentos só entram quando o proprietário fornecer dados reais e autorização.
 - Não reintroduza Perfil/Personalizar Perfil, Atividades ou Jogos e grupos/LFG. Essas decisões pertencem ao bot/dashboard e continuam removidas.
