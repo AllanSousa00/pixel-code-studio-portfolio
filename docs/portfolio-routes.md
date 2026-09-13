@@ -5,7 +5,7 @@ Base canônica: `https://pixel-code-studio-portfolio.pages.dev`.
 | URL | Função | Indexável | Canonical |
 |---|---|:---:|---|
 | `/` | Home com hero, galeria, serviços, processo, contato e footer | Sim | `/` |
-| `/sobre` | Allan Sousa, princípios e projetos representativos | Sim | `/sobre` |
+| `/sobre` | Perfil de Allan da Cruz Souza, forma de trabalho, trajetória, tecnologias e projetos representativos | Sim | `/sobre` |
 | `/servicos` | Detalhamento de serviços e FAQ | Sim | `/servicos` |
 | `/projetos` | Catálogo filtrável dos sete projetos reais | Sim | `/projetos` |
 | `/projetos/:slug` | Imagem, contexto, solução, tecnologias e entrega | Sim quando existe | rota do projeto |

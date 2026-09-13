@@ -1,5 +1,5 @@
 import { useMemo, useState, type FormEvent, type ReactNode } from 'react'
-import { ArrowDownRight, ArrowRight, ArrowUpRight, Bot, Braces, Check, CheckCircle2, Code2, ExternalLink, FileText, Layers3, Mail, ShieldCheck, Target, Wrench, Zap } from 'lucide-react'
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Bot, Braces, Check, CheckCircle2, Code2, ExternalLink, FileText, Layers3, Mail, Rocket, ShieldCheck, Sparkles, Target, Wrench, Zap } from 'lucide-react'
 import App, { projects, services } from './App'
 import BottomNavBar from './components/ui/bottom-nav-bar'
 import SiteFooter from './components/ui/footer'
@@ -25,8 +25,71 @@ function PageHero({ eyebrow, title, description, aside }: { eyebrow: string; tit
 function ProjectCard({ project }: { project: Project }) { return <article className="page-project-card"><Link href={`/projetos/${slugify(project.name)}`} className="page-project-card__media"><img src={project.imageSmall} width={project.imageWidth} height={project.imageHeight} loading="lazy" decoding="async" alt={`Interface real do projeto ${project.name}`} /><span><ArrowUpRight aria-hidden="true" /></span></Link><div><p>{categoryByProject[project.name] ?? project.kind}</p><h2>{project.name}</h2><span>{project.description}</span><ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul></div></article> }
 
 function AboutPage() {
-  usePageMeta({ title: 'Sobre Allan Sousa — Pixel Code Studio', description: 'Conheça Allan Sousa, desenvolvedor e criador da Pixel Code Studio.', path: '/sobre' })
-  return <InnerLayout activeIndex={1}><Breadcrumbs current="Sobre mim" /><PageHero eyebrow="Sobre Allan Sousa" title={<>Eu sou Allan. <em>Desenvolvo para a web.</em></>} description="Sou o desenvolvedor e criador da Pixel Code Studio. Meu trabalho é transformar uma ideia em um produto digital claro, responsivo e pronto para ser usado." aside={<div className="creator-card"><div className="creator-card__placeholder" aria-label="Placeholder para foto real de Allan Sousa">AS</div><strong>Allan Sousa</strong><small>Desenvolvedor e criador da Pixel</small><span>Foto real será adicionada quando fornecida.</span></div>} /><section className="section page-section"><div className="inner-shell page-two-column"><div><p className="kicker"><Target aria-hidden="true" /> O que eu faço</p><h2>Eu cuido da ideia até a <em>entrega.</em></h2><p className="page-lead">Entendo o objetivo, organizo a solução, desenvolvo a interface e reviso os fluxos para que o resultado funcione de verdade no dia a dia.</p><div className="detail-actions"><a className="button button--ghost" href="https://github.com/AllanSousa00" target="_blank" rel="noreferrer">Ver meu GitHub <ExternalLink aria-hidden="true" /></a><Link className="button button--primary" href="/contato">Falar comigo <ArrowRight aria-hidden="true" /></Link></div></div><div className="principles-list">{[{ icon: Target, title: 'Entender antes de construir', text: 'Começo pelo objetivo e pelo público de cada projeto.' }, { icon: Braces, title: 'Desenvolver com clareza', text: 'Transformo o escopo em interfaces, componentes e fluxos fáceis de usar.' }, { icon: Wrench, title: 'Entregar algo utilizável', text: 'Responsividade, navegação e publicação fazem parte do meu trabalho.' }].map(({ icon: Icon, title, text }) => <article key={title}><Icon aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></div></section><section className="section page-section"><div className="inner-shell"><p className="kicker"><Code2 aria-hidden="true" /> Áreas em que atuo</p><h2>Sites, plataformas e <em>automações.</em></h2><div className="principles-list about-focus-list">{[{ icon: Layers3, title: 'Sites e plataformas', text: 'Interfaces institucionais, páginas de apresentação e produtos web sob medida.' }, { icon: Bot, title: 'Bots e automações', text: 'Fluxos digitais para atendimento, operação e tarefas que precisam acontecer com menos atrito.' }, { icon: Zap, title: 'Experiências digitais', text: 'Soluções que combinam conteúdo, interação e uma identidade própria.' }].map(({ icon: Icon, title, text }) => <article key={title}><Icon aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></div></section></InnerLayout>
+  usePageMeta({ title: 'Sobre Allan da Cruz Souza — Pixel Code Studio', description: 'Conheça Allan da Cruz Souza, estudante de Informática e criador da Pixel Code Studio.', path: '/sobre' })
+  return (
+    <InnerLayout activeIndex={1}>
+      <Breadcrumbs current="Sobre mim" />
+      <PageHero
+        eyebrow="Sobre Allan da Cruz Souza"
+        title={<>Eu sou Allan.<br /><em>Desenvolvo para a web e além.</em></>}
+        description="Tenho 18 anos, sou estudante de Informática e criador da Pixel Code Studio. Trabalho com desenvolvimento web, sistemas, bots e outros projetos que juntam programação, criatividade e tecnologia."
+        aside={<div className="creator-card"><div className="creator-card__placeholder" aria-label="Espaço reservado para foto de Allan da Cruz Souza">AS</div><strong>Allan da Cruz Souza</strong><small>Desenvolvedor e criador da Pixel Code Studio.</small><span>JavaScript · Java · PHP · SQL</span></div>}
+      />
+      <section className="section page-section">
+        <div className="inner-shell page-two-column">
+          <div>
+            <p className="kicker"><Target aria-hidden="true" /> O que eu faço</p>
+            <h2>Eu pego a ideia e transformo em <em>projeto.</em></h2>
+            <p className="page-lead">Gosto de participar desde a ideia inicial até o resultado final. Antes de começar a desenvolver, procuro entender o que o projeto realmente precisa, organizar a solução e então transformar isso em algo funcional, bem apresentado e pronto para uso.</p>
+            <div className="detail-actions"><a className="button button--ghost" href="https://github.com/AllanSousa00" target="_blank" rel="noreferrer">Ver meu GitHub <ExternalLink aria-hidden="true" /></a><Link className="button button--primary" href="/contato">Falar comigo <ArrowRight aria-hidden="true" /></Link></div>
+          </div>
+          <div className="principles-list">
+            {[{ icon: Target, title: 'Entendo antes de desenvolver', text: 'Primeiro vem a ideia, o problema e o objetivo. O código vem depois.' }, { icon: Braces, title: 'Desenvolvo de ponta a ponta', text: 'Trabalho tanto na parte visual quanto na lógica e estrutura por trás do projeto.' }, { icon: Wrench, title: 'Entrego algo que eu usaria', text: 'Não gosto de fazer só para funcionar. Organização, aparência e experiência também fazem parte do projeto.' }].map(({ icon: Icon, title, text }) => <article key={title}><Icon aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>)}
+          </div>
+        </div>
+      </section>
+      <section className="section page-section">
+        <div className="inner-shell">
+          <p className="kicker"><Code2 aria-hidden="true" /> O que eu desenvolvo</p>
+          <h2>Sites, sistemas, bots e <em>projetos próprios.</em></h2>
+          <div className="principles-list about-focus-list">
+            {[{ icon: Layers3, title: 'Sites e plataformas', text: 'Portfólios, páginas institucionais, plataformas web e experiências pensadas para funcionar bem no computador e no celular.' }, { icon: Bot, title: 'Sistemas e automações', text: 'Ferramentas administrativas, integrações, bots e soluções que automatizam processos e resolvem necessidades específicas.' }, { icon: Zap, title: 'Projetos autorais', text: 'Também desenvolvo ideias próprias, desde ferramentas voltadas para educação até jogos e projetos experimentais.' }].map(({ icon: Icon, title, text }) => <article key={title}><Icon aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>)}
+          </div>
+        </div>
+      </section>
+      <section className="section page-section about-story-section">
+        <div className="inner-shell page-two-column">
+          <div><p className="kicker"><Sparkles aria-hidden="true" /> Um pouco sobre mim</p><h2>Da curiosidade pela informática aos meus próprios <em>projetos.</em></h2></div>
+          <div className="about-story-copy"><p>Meu nome é <strong>Allan da Cruz Souza</strong>, tenho 18 anos e nasci no Rio de Janeiro. Atualmente sou estudante do curso de Informática em Belém-PB.</p><p>Sempre gostei da área de informática e computação, mas meu interesse passou a ficar ainda maior quando comecei a transformar o que aprendia em projetos reais. Foi assim que comecei a trabalhar com HTML, CSS, JavaScript, Java, PHP e SQL e, com o tempo, fui explorando outras áreas do desenvolvimento.</p><p>A <strong>Pixel Code Studio</strong> nasceu justamente como uma forma de reunir esses projetos e transformar esse trabalho em algo maior: um espaço para desenvolver sites, sistemas, bots, automações e novas ideias.</p></div>
+        </div>
+      </section>
+      <section className="section page-section">
+        <div className="inner-shell">
+          <p className="kicker"><Rocket aria-hidden="true" /> Minha trajetória</p>
+          <h2>Alguns projetos que fizeram parte dessa <em>trajetória.</em></h2>
+          <div className="page-project-grid page-project-grid--three about-trajectory-grid">
+            <article className="page-project-card"><div><p>SIMITEC · 2024 e 2026</p><h2>Site oficial</h2><span>Desenvolvimento do site do evento SIMITEC em duas edições. A primeira foi realizada em 2024 e uma nova versão foi desenvolvida para a edição de 2026.</span><Link className="text-link" href="/projetos/simitec-2026">Ver projeto <ArrowUpRight aria-hidden="true" /></Link></div></article>
+            <article className="page-project-card"><div><p>Repertoryd · Plataforma</p><h2>Repertoryd</h2><span>Plataforma criada para ajudar estudantes a encontrar repertórios que possam ser utilizados em redações do ENEM, organizando referências de forma mais prática para estudo e consulta.</span><Link className="text-link" href="/projetos/repertoryd">Ver projeto <ArrowUpRight aria-hidden="true" /></Link></div></article>
+            <article className="page-project-card"><div><p>Projetos autorais</p><h2>Jogos e outras ideias</h2><span>Além dos projetos web, também desenvolvo jogos e experiências menores para explorar novas ideias, tecnologias e formas de interação.</span><Link className="text-link" href="/projetos">Explorar projetos <ArrowUpRight aria-hidden="true" /></Link></div></article>
+          </div>
+        </div>
+      </section>
+      <section className="section page-section">
+        <div className="inner-shell page-two-column">
+          <div><p className="kicker"><Code2 aria-hidden="true" /> Tecnologias</p><h2>Tecnologias com que <em>trabalho.</em></h2></div>
+          <div className="principles-list about-tech-list">
+            {[{ icon: Code2, title: 'Web', text: 'HTML · CSS · JavaScript' }, { icon: Layers3, title: 'Backend e dados', text: 'PHP · SQL' }, { icon: Braces, title: 'Programação', text: 'Java' }].map(({ icon: Icon, title, text }) => <article key={title}><Icon aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>)}
+          </div>
+        </div>
+      </section>
+      <section className="section page-section">
+        <div className="inner-shell page-two-column">
+          <div><p className="kicker"><Sparkles aria-hidden="true" /> Pixel Code Studio</p><h2>E onde entra a <em>Pixel?</em></h2></div>
+          <p className="page-lead">A Pixel Code Studio é a marca que criei para reunir meu trabalho. É através dela que organizo meus projetos, apresento meus serviços e desenvolvo soluções para outras pessoas sem deixar de lado os projetos autorais que fizeram parte da minha evolução como desenvolvedor.</p>
+        </div>
+      </section>
+    </InnerLayout>
+  )
 }
 
 function ProjectsPage() {

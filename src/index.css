@@ -458,6 +458,12 @@ a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255
 .page-section--tint { background: var(--panel-2); }
 .page-section h2 { margin: 18px 0 24px; font: 700 clamp(42px, 6vw, 82px)/.92 var(--display); letter-spacing: -.065em; }
 .page-lead { max-width: 650px; color: var(--muted); font-size: 18px; line-height: 1.65; }
+.about-story-copy { display: grid; gap: 18px; max-width: 65ch; }
+.about-story-copy p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.65; }
+.about-story-copy strong { color: var(--ink); font-weight: 700; }
+.about-trajectory-grid { margin-top: 34px; }
+.about-trajectory-grid .page-project-card > div > span { min-height: 120px; }
+.about-trajectory-grid .text-link { display: inline-flex; margin-top: 18px; }
 .page-two-column { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(48px, 6vw, 120px); align-items: start; }
 .principles-list { display: grid; gap: 10px; }
 .principles-list article { display: grid; grid-template-columns: 32px 1fr; gap: 14px; padding: 20px; border: 1px solid var(--line); background: var(--panel); }
