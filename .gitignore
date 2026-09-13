@@ -14,6 +14,12 @@ dist-ssr
 .playwright-cli
 output
 
+# Agent review skills are installed locally for this workspace and are pinned in
+# skills-lock.json / docs/rules/external-tools.md rather than shipped with the site.
+.agents/
+.codex/
+skills-lock.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

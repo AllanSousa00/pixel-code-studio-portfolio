@@ -1,235 +1,89 @@
-# Design System Master File
+# Design System — Pixel Code Studio Portfolio
 
-> **LOGIC:** When building a specific page, first check `design-system/pages/[page-name].md`.
-> If that file exists, its rules **override** this Master file.
-> If not, strictly follow the rules below.
+**Atualizado:** 2026-09-13
+**Fonte de decisão:** UI UX Pro Max executado com o perfil `creative software studio developer portfolio dark editorial accessible conversion` e adaptado à identidade Pixel existente.
+**Dials:** variação 7/10 · movimento 4/10 · densidade 5/10.
 
----
+## Direção
 
-**Project:** Pixel Code Studio Portfolio
-**Generated:** 2026-09-06 21:52:34
-**Category:** Creative Agency
-**Design Dials:** Variance 8/10 (Bold / Asymmetric) | Motion 7/10 (Standard) | Density 4/10 (Standard)
+O sistema combina storytelling editorial, contraste alto e geometria inspirada em pixels. A estrutura apresenta trabalho real antes de efeitos decorativos. A marca e Allan Sousa aparecem como partes da mesma autoria.
 
----
+- Visual escuro, limpo, tecnológico e organizado.
+- Formas majoritariamente quadradas; pílulas ficam restritas à navegação e filtros.
+- Imagens reais de projeto são a prova visual principal.
+- Movimento explica continuidade: entrada de página, troca de projeto, menu, FAQ e feedback.
+- O conteúdo permanece legível sem animação, hover ou JavaScript de terceiros.
 
-## Global Rules
+## Tokens de cor
 
-### Color Palette
+| Papel | Tema escuro | Tema claro | Uso |
+|---|---:|---:|---|
+| Fundo | `#080809` | `#F4F3ED` | canvas principal |
+| Painel | `#101012` | `#FFFEFA` | cards e blocos |
+| Texto | `#F7F7F2` | `#131315` | títulos e corpo principal |
+| Texto secundário | `#AAAAB1` | `#56565D` | descrições |
+| Verde Pixel | `#C7FF38` | `#4F7000` | CTA, foco, estado ativo |
+| Violeta Pixel | `#9975FF` | `#633EE2` | profundidade, ícones, apoio |
 
-| Role | Hex | CSS Variable |
-|------|-----|--------------|
-| Primary | `#C7FF38` | `--color-primary` |
-| On Primary | `#080809` | `--color-on-primary` |
-| Secondary | `#9975FF` | `--color-secondary` |
-| On Secondary | `#080809` | `--color-on-secondary` |
-| Accent/CTA | `#F4F4EF` | `--color-accent` |
-| On Accent/CTA | `#080809` | `--color-on-accent` |
-| Background | `#080809` | `--color-background` |
-| Foreground | `#F4F4EF` | `--color-foreground` |
-| Card | `#101012` | `--color-card` |
-| Card Foreground | `#F4F4EF` | `--color-card-foreground` |
-| Muted | `#18181B` | `--color-muted` |
-| Muted Foreground | `#A4A4AA` | `--color-muted-foreground` |
-| Border | `#303035` | `--color-border` |
-| Destructive | `#DC2626` | `--color-destructive` |
-| On Destructive | `#FFFFFF` | `--color-on-destructive` |
-| Ring | `#C7FF38` | `--color-ring` |
+O verde do tema claro foi escurecido para manter contraste. Não usar verde elétrico com texto branco. O violeta não substitui o CTA principal.
 
-**Color Notes:** Paleta tecnológica escura com verde elétrico para conversão e violeta para profundidade. Adaptação do resultado do gerador ao briefing visual da marca.
+## Tipografia
 
-### Typography
+- Display: Archivo, pesos 700–850, tracking negativo em títulos grandes.
+- Corpo: Space Grotesk, pesos 400–700, linha entre 1.55 e 1.75.
+- H1: `clamp(48px, 7.4vw, 108px)`, um por página.
+- H2: `clamp(38px, 6vw, 82px)`.
+- Corpo: 15–17px; textos auxiliares nunca menores que 10px.
+- Fontes locais em WOFF2, com preload e `font-display: swap`.
 
-- **Heading Font:** Archivo
-- **Body Font:** Space Grotesk
-- **Mood:** minimal, portfolio, designer, creative, clean, artistic
-- **Google Fonts:** [Archivo + Space Grotesk](https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap)
+## Espaçamento e largura
 
-**CSS Import:**
-```css
-@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-```
+- Conteúdo: máximo 1240px.
+- Respiro lateral: 24px no desktop e 16px no mobile.
+- Seções: 120px no desktop e 82px no mobile.
+- Escala base: 4, 8, 12, 16, 24, 32, 48, 64, 82, 120.
 
-### Spacing Variables
+## Componentes
 
-*Density: 4/10 — Standard*
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--space-xs` | `4px` / `0.25rem` | Tight gaps |
-| `--space-sm` | `8px` / `0.5rem` | Icon gaps, inline spacing |
-| `--space-md` | `16px` / `1rem` | Standard padding |
-| `--space-lg` | `24px` / `1.5rem` | Section padding |
-| `--space-xl` | `32px` / `2rem` | Large gaps |
-| `--space-2xl` | `48px` / `3rem` | Section margins |
-| `--space-3xl` | `64px` / `4rem` | Hero padding |
-
-### Shadow Depths
-
-| Level | Value | Usage |
-|-------|-------|-------|
-| `--shadow-sm` | `0 1px 2px rgba(0,0,0,0.05)` | Subtle lift |
-| `--shadow-md` | `0 4px 6px rgba(0,0,0,0.1)` | Cards, buttons |
-| `--shadow-lg` | `0 10px 15px rgba(0,0,0,0.1)` | Modals, dropdowns |
-| `--shadow-xl` | `0 20px 25px rgba(0,0,0,0.15)` | Hero images, featured cards |
-
----
-
-## Component Specs
-
-### Buttons
-
-```css
-/* Primary Button */
-.btn-primary {
-  background: #C7FF38;
-  color: #080809;
-  padding: 12px 24px;
-  border-radius: 0;
-  font-weight: 600;
-  transition: all 200ms ease;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
-/* Secondary Button */
-.btn-secondary {
-  background: transparent;
-  color: #F4F4EF;
-  border: 1px solid #303035;
-  padding: 12px 24px;
-  border-radius: 0;
-  font-weight: 600;
-  transition: all 200ms ease;
-  cursor: pointer;
-}
-```
-
-### Cards
-
-```css
-.card {
-  background: #101012;
-  border: 1px solid #303035;
-  border-radius: 0;
-  padding: 24px;
-  box-shadow: var(--shadow-md);
-  transition: all 200ms ease;
-  cursor: pointer;
-}
-
-.card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-}
-```
-
-### Inputs
-
-```css
-.input {
-  padding: 12px 16px;
-  border: 1px solid #E2E8F0;
-  border-radius: 0;
-  font-size: 16px;
-  transition: border-color 200ms ease;
-}
-
-.input:focus {
-  border-color: #C7FF38;
-  outline: none;
-  box-shadow: 0 0 0 3px #C7FF3820;
-}
-```
-
-### Modals
-
-```css
-.modal-overlay {
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-}
-
-.modal {
-  background: #101012;
-  border: 1px solid #303035;
-  border-radius: 0;
-  padding: 32px;
-  box-shadow: var(--shadow-xl);
-  max-width: 500px;
-  width: 90%;
-}
-```
-
----
-
-## Style Guidelines
-
-**Style:** Brutalism
-
-**Keywords:** Raw, unpolished, stark, high contrast, plain text, default fonts, visible borders, asymmetric, anti-design
-
-**Best For:** Design portfolios, artistic projects, counter-culture brands, editorial/media sites, tech blogs
-
-**Key Effects:** No smooth transitions (instant), sharp corners (0px), bold typography (700+), visible grid, large blocks
-
-### Page Pattern
-
-**Pattern Name:** Scroll-Triggered Storytelling
-
-- **Conversion Strategy:** Keep the narrative understandable without scroll-driven effects. Use progress indicator. Mobile: simplify animations. Keep DOM reading order complete; disable parallax and scroll-scrub under reduced motion. Pause scroll animation when offscreen or hidden and render each chapter in its final readable state under reduced motion.
-- **CTA Placement:** End of each chapter (mini) + Final climax CTA
-- **Section Order:** Intro hook > Chapter 1 (problem) > Chapter 2 (journey) > Chapter 3 (solution) > Climax CTA
-
----
+- Navbar: pílula compacta, fixa, com 44px mínimos por alvo e menu modal no mobile.
+- Botão primário: verde Pixel, texto de alto contraste e rótulo que descreve a ação.
+- Cards: borda de 1px, fundo de painel, imagem com dimensão explícita; sem card dentro de card.
+- Project showcase: abas visíveis, transição de 580ms e controle de pausa; conteúdo essencial acessível por toque e teclado.
+- FAQ: botão completo como alvo, `aria-expanded`, animação de altura e estado final legível com movimento reduzido.
+- Formulário: quatro campos, validação direta, feedback textual e comportamento real declarado.
+- Loading: Ring da LDRS apenas durante code splitting; nunca como splash longo.
 
 ## Motion
 
-**Stagger List** (Standard) — Trigger: load or scroll | Duration: 300-450ms | Easing: `back.out(1.4)`
+- Biblioteca: `motion/react`.
+- Reveal: 560ms, `cubic-bezier(.22,1,.36,1)`.
+- Troca de projeto: 580ms, saída antes da entrada.
+- Rota: 340ms, `AnimatePresence` em modo `wait`.
+- Hovers: 200–300ms, sem deslocar a estrutura.
+- `prefers-reduced-motion`: remove parallax, autoplay e transições não essenciais.
 
-```js
-gsap.from('.grid-item', { opacity: 0, scale: 0.92, y: 16, duration: 0.4, stagger: { each: 0.06, from: 'start', grid: 'auto' }, ease: 'back.out(1.4)' });
-```
+## Responsividade
 
-**Framework notes:** grid: 'auto' lets GSAP infer rows/columns from a CSS grid layout for a natural wave stagger; Use matchMedia('(prefers-reduced-motion: reduce)') to skip non-essential motion and render the final state immediately
+- 390px: navegação por menu, projeto sem hover, CTA fixo com safe area.
+- 768px: grids passam para uma ou duas colunas conforme conteúdo.
+- 1024px: cards e serviços mantêm hierarquia com textos completos.
+- 1366–1600px: largura máxima impede linhas longas e mantém ritmo editorial.
 
-- ✅ Combine with from: 'center' for a bento-grid layout to draw the eye inward first
-- ❌ Don't use back.out on dense data tables; the overshoot reads as sloppy on informational UI
-- ⚡ Group DOM writes; avoid interleaving layout reads (getBoundingClientRect) between staggered tweens
+## Acessibilidade
 
----
+- Foco violeta de 3px em todos os controles.
+- Alvo mínimo de 44px.
+- Link “Pular para o conteúdo”.
+- Estrutura semântica de heading; um H1 por página.
+- Imagens informativas com alt contextual; arte decorativa com `aria-hidden`.
+- Menu fecha com Escape, bloqueia scroll e recebe foco.
+- Informação não depende de cor, hover ou animação.
 
-## Anti-Patterns (Do NOT Use)
+## Anti padrões
 
-- ❌ Corporate minimalism
-- ❌ Hidden portfolio
-
-### Additional Forbidden Patterns
-
-- ❌ **Emojis as icons** — Use SVG icons (Heroicons, Lucide, Simple Icons)
-- ❌ **Missing cursor:pointer** — All clickable elements must have cursor:pointer
-- ❌ **Layout-shifting hovers** — Avoid scale transforms that shift layout
-- ❌ **Low contrast text** — Maintain 4.5:1 minimum contrast ratio
-- ❌ **Instant state changes** — Always use transitions (150-300ms)
-- ❌ **Invisible focus states** — Focus states must be visible for a11y
-
----
-
-## Pre-Delivery Checklist
-
-Before delivering any UI code, verify:
-
-- [ ] No emojis used as icons (use SVG instead)
-- [ ] All icons from consistent icon set (Heroicons/Lucide)
-- [ ] `cursor-pointer` on all clickable elements
-- [ ] Hover states with smooth transitions (150-300ms)
-- [ ] Light mode: text contrast 4.5:1 minimum
-- [ ] Focus states visible for keyboard navigation
-- [ ] `prefers-reduced-motion` respected
-- [ ] Responsive: 375px, 768px, 1024px, 1440px
-- [ ] No content hidden behind fixed navbars
-- [ ] No horizontal scroll on mobile
+- Não usar frases genéricas, métricas sem fonte, depoimentos fictícios ou barras de habilidade.
+- Não usar emojis como iconografia estrutural.
+- Não misturar famílias de ícones; Phosphor é a biblioteca principal.
+- Não aplicar glow, gradiente ou pílulas em todo elemento.
+- Não esconder informações essenciais em hover.
+- Não criar um novo visual futurista ou gamer sem contexto.
