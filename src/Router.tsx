@@ -1,119 +1,15 @@
-import { useMemo, useState, type FormEvent, type ReactNode } from 'react'
-import { ArrowDownRight, ArrowRight, ArrowUpRight, Bot, Braces, Check, CheckCircle2, Code2, ExternalLink, FileText, Layers3, Mail, Rocket, ShieldCheck, Sparkles, Target, Wrench, Zap } from 'lucide-react'
-import App, { projects, services } from './App'
-import BottomNavBar from './components/ui/bottom-nav-bar'
-import SiteFooter from './components/ui/footer'
-import { Link, useRouter } from './lib/router'
-import { usePageMeta } from './lib/seo'
+import { lazy, Suspense } from 'react'
+import { useRouter } from './lib/router'
 
-type Project = (typeof projects)[number]
-const email = 'allancruzsousa519@gmail.com'
-const whatsapp = import.meta.env.VITE_WHATSAPP_URL?.trim() || 'https://wa.me/5583996309727?text=Ol%C3%A1%21%20Encontrei%20a%20Pixel%20Code%20Studio%20pelo%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.'
-const discord = import.meta.env.VITE_DISCORD_URL?.trim() || 'https://discord.gg/n8fzg8KFV5'
+const HomePage = lazy(() => import('./App'))
+const PortfolioPages = lazy(() => import('./pages/PortfolioPages'))
 
-function slugify(value: string) { return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') }
-const categoryByProject: Record<string, string> = { 'Vértice ENEM': 'Educação', 'Conexões Modernistas': 'Educação', 'SIMITEC 2026': 'Eventos', Repertoryd: 'Plataformas', 'Português em Jogos': 'Educação', 'Central de Autorizações': 'Sistemas', 'Portal de Direitos': 'Sistemas' }
-const projectDetails: Record<string, { challenge: string; solution: string; result: string }> = {
-  'Vértice ENEM': { challenge: 'Organizar repertórios socioculturais sem esconder o contexto necessário para usar cada referência.', solution: 'A informação foi dividida em jornadas curtas, com busca, páginas editoriais e áreas conectadas por uma linguagem visual consistente.', result: 'O conteúdo passou a existir em uma plataforma publicada e preparada para consulta por tema e contexto.' },
-  'Conexões Modernistas': { challenge: 'Transformar conteúdo literário em uma dinâmica que funcionasse individualmente e em atividade coletiva.', solution: 'O projeto reúne acesso por código, modos de jogo distintos, rodadas de conteúdo e feedback visual.', result: 'A proposta foi publicada como uma experiência web responsiva que conecta conteúdo e interação.' },
-  'SIMITEC 2026': { challenge: 'Reunir informações de evento, inscrição e atendimento sem perder a orientação do visitante.', solution: 'Uma hierarquia editorial separa programação, conteúdo institucional, galeria e chamada para inscrição.', result: 'O evento ganhou um ponto de acesso público e responsivo para concentrar sua comunicação.' },
+function RouteFallback() {
+  return <main className="route-fallback" aria-busy="true"><span className="sr-only">Carregando página…</span></main>
 }
 
-function InnerLayout({ children, activeIndex = 0 }: { children: ReactNode; activeIndex?: number }) { return <><header className="site-header"><BottomNavBar className="top-nav" defaultIndex={activeIndex} /></header><main className="inner-main">{children}</main><SiteFooter /></> }
-function Breadcrumbs({ current }: { current: string }) { return <nav className="page-breadcrumbs inner-shell" aria-label="Você está em"><Link href="/">Início</Link><span aria-hidden="true">/</span><span>{current}</span></nav> }
-function PageHero({ eyebrow, title, description, aside }: { eyebrow: string; title: ReactNode; description: string; aside?: ReactNode }) { return <section className="inner-hero"><div className="inner-hero__grid" aria-hidden="true" /><div className="inner-shell inner-hero__content"><div><p className="kicker"><Code2 aria-hidden="true" /> {eyebrow}</p><h1>{title}</h1><p>{description}</p></div>{aside}</div></section> }
-function ProjectCard({ project }: { project: Project }) { return <article className="page-project-card"><Link href={`/projetos/${slugify(project.name)}`} className="page-project-card__media"><img src={project.imageSmall} width={project.imageWidth} height={project.imageHeight} loading="lazy" decoding="async" alt={`Interface real do projeto ${project.name}`} /><span><ArrowUpRight aria-hidden="true" /></span></Link><div><p>{categoryByProject[project.name] ?? project.kind}</p><h2>{project.name}</h2><span>{project.description}</span><ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul></div></article> }
-
-function AboutPage() {
-  usePageMeta({ title: 'Sobre Allan da Cruz Souza — Pixel Code Studio', description: 'Conheça Allan da Cruz Souza, estudante de Informática e criador da Pixel Code Studio.', path: '/sobre' })
-  return (
-    <InnerLayout activeIndex={1}>
-      <Breadcrumbs current="Sobre mim" />
-      <PageHero
-        eyebrow="Sobre Allan da Cruz Souza"
-        title={<>Eu sou Allan.<br /><em>Desenvolvo para a web e além.</em></>}
-        description="Tenho 18 anos, sou estudante de Informática e criador da Pixel Code Studio. Trabalho com desenvolvimento web, sistemas, bots e outros projetos que juntam programação, criatividade e tecnologia."
-        aside={<div className="creator-card"><div className="creator-card__placeholder" aria-label="Espaço reservado para foto de Allan da Cruz Souza">AS</div><strong>Allan da Cruz Souza</strong><small>Desenvolvedor e criador da Pixel Code Studio.</small><span>JavaScript · Java · PHP · SQL</span></div>}
-      />
-      <section className="section page-section">
-        <div className="inner-shell page-two-column">
-          <div>
-            <p className="kicker"><Target aria-hidden="true" /> O que eu faço</p>
-            <h2>Eu pego a ideia e transformo em <em>projeto.</em></h2>
-            <p className="page-lead">Gosto de participar desde a ideia inicial até o resultado final. Antes de começar a desenvolver, procuro entender o que o projeto realmente precisa, organizar a solução e então transformar isso em algo funcional, bem apresentado e pronto para uso.</p>
-            <div className="detail-actions"><a className="button button--ghost" href="https://github.com/AllanSousa00" target="_blank" rel="noreferrer">Ver meu GitHub <ExternalLink aria-hidden="true" /></a><Link className="button button--primary" href="/contato">Falar comigo <ArrowRight aria-hidden="true" /></Link></div>
-          </div>
-          <div className="principles-list">
-            {[{ icon: Target, title: 'Entendo antes de desenvolver', text: 'Primeiro vem a ideia, o problema e o objetivo. O código vem depois.' }, { icon: Braces, title: 'Desenvolvo de ponta a ponta', text: 'Trabalho tanto na parte visual quanto na lógica e estrutura por trás do projeto.' }, { icon: Wrench, title: 'Entrego algo que eu usaria', text: 'Não gosto de fazer só para funcionar. Organização, aparência e experiência também fazem parte do projeto.' }].map(({ icon: Icon, title, text }) => <article key={title}><Icon aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>)}
-          </div>
-        </div>
-      </section>
-      <section className="section page-section">
-        <div className="inner-shell">
-          <p className="kicker"><Code2 aria-hidden="true" /> O que eu desenvolvo</p>
-          <h2>Sites, sistemas, bots e <em>projetos próprios.</em></h2>
-          <div className="principles-list about-focus-list">
-            {[{ icon: Layers3, title: 'Sites e plataformas', text: 'Portfólios, páginas institucionais, plataformas web e experiências pensadas para funcionar bem no computador e no celular.' }, { icon: Bot, title: 'Sistemas e automações', text: 'Ferramentas administrativas, integrações, bots e soluções que automatizam processos e resolvem necessidades específicas.' }, { icon: Zap, title: 'Projetos autorais', text: 'Também desenvolvo ideias próprias, desde ferramentas voltadas para educação até jogos e projetos experimentais.' }].map(({ icon: Icon, title, text }) => <article key={title}><Icon aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>)}
-          </div>
-        </div>
-      </section>
-      <section className="section page-section about-story-section">
-        <div className="inner-shell page-two-column">
-          <div><p className="kicker"><Sparkles aria-hidden="true" /> Um pouco sobre mim</p><h2>Da curiosidade pela informática aos meus próprios <em>projetos.</em></h2></div>
-          <div className="about-story-copy"><p>Meu nome é <strong>Allan da Cruz Souza</strong>, tenho 18 anos e nasci no Rio de Janeiro. Atualmente sou estudante do curso de Informática em Belém-PB.</p><p>Sempre gostei da área de informática e computação, mas meu interesse passou a ficar ainda maior quando comecei a transformar o que aprendia em projetos reais. Foi assim que comecei a trabalhar com HTML, CSS, JavaScript, Java, PHP e SQL e, com o tempo, fui explorando outras áreas do desenvolvimento.</p><p>A <strong>Pixel Code Studio</strong> nasceu justamente como uma forma de reunir esses projetos e transformar esse trabalho em algo maior: um espaço para desenvolver sites, sistemas, bots, automações e novas ideias.</p></div>
-        </div>
-      </section>
-      <section className="section page-section">
-        <div className="inner-shell">
-          <p className="kicker"><Rocket aria-hidden="true" /> Minha trajetória</p>
-          <h2>Alguns projetos que fizeram parte dessa <em>trajetória.</em></h2>
-          <div className="page-project-grid page-project-grid--three about-trajectory-grid">
-            <article className="page-project-card"><div><p>SIMITEC · 2024 e 2026</p><h2>Site oficial</h2><span>Desenvolvimento do site do evento SIMITEC em duas edições. A primeira foi realizada em 2024 e uma nova versão foi desenvolvida para a edição de 2026.</span><Link className="text-link" href="/projetos/simitec-2026">Ver projeto <ArrowUpRight aria-hidden="true" /></Link></div></article>
-            <article className="page-project-card"><div><p>Repertoryd · Plataforma</p><h2>Repertoryd</h2><span>Plataforma criada para ajudar estudantes a encontrar repertórios que possam ser utilizados em redações do ENEM, organizando referências de forma mais prática para estudo e consulta.</span><Link className="text-link" href="/projetos/repertoryd">Ver projeto <ArrowUpRight aria-hidden="true" /></Link></div></article>
-            <article className="page-project-card"><div><p>Projetos autorais</p><h2>Jogos e outras ideias</h2><span>Além dos projetos web, também desenvolvo jogos e experiências menores para explorar novas ideias, tecnologias e formas de interação.</span><Link className="text-link" href="/projetos">Explorar projetos <ArrowUpRight aria-hidden="true" /></Link></div></article>
-          </div>
-        </div>
-      </section>
-      <section className="section page-section">
-        <div className="inner-shell page-two-column">
-          <div><p className="kicker"><Code2 aria-hidden="true" /> Tecnologias</p><h2>Tecnologias com que <em>trabalho.</em></h2></div>
-          <div className="principles-list about-tech-list">
-            {[{ icon: Code2, title: 'Web', text: 'HTML · CSS · JavaScript' }, { icon: Layers3, title: 'Backend e dados', text: 'PHP · SQL' }, { icon: Braces, title: 'Programação', text: 'Java' }].map(({ icon: Icon, title, text }) => <article key={title}><Icon aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></article>)}
-          </div>
-        </div>
-      </section>
-      <section className="section page-section">
-        <div className="inner-shell page-two-column">
-          <div><p className="kicker"><Sparkles aria-hidden="true" /> Pixel Code Studio</p><h2>E onde entra a <em>Pixel?</em></h2></div>
-          <p className="page-lead">A Pixel Code Studio é a marca que criei para reunir meu trabalho. É através dela que organizo meus projetos, apresento meus serviços e desenvolvo soluções para outras pessoas sem deixar de lado os projetos autorais que fizeram parte da minha evolução como desenvolvedor.</p>
-        </div>
-      </section>
-    </InnerLayout>
-  )
+export function PortfolioRouter() {
+  const { pathname } = useRouter()
+  const Page = pathname === '/' ? HomePage : PortfolioPages
+  return <Suspense fallback={<RouteFallback />}><Page /></Suspense>
 }
-
-function ProjectsPage() {
-  const [filter, setFilter] = useState('Todos')
-  const categories = ['Todos', 'Educação', 'Plataformas', 'Eventos', 'Sistemas']
-  const shown = filter === 'Todos' ? projects : projects.filter((project) => categoryByProject[project.name] === filter)
-  usePageMeta({ title: 'Projetos — Pixel Code Studio', description: 'Explore os projetos reais publicados pela Pixel Code Studio.', path: '/projetos' })
-  return <InnerLayout activeIndex={2}><Breadcrumbs current="Projetos" /><PageHero eyebrow="Projetos publicados" title={<>Produtos reais, com resultado <em>visível.</em></>} description="Uma seleção de sites, plataformas, sistemas e experiências que podem ser acessados e conferidos." aside={<div className="page-stat"><strong>07</strong><span>projetos<br />publicados</span></div>} /><section className="section page-section"><div className="inner-shell"><div className="filter-row" role="group" aria-label="Filtrar projetos">{categories.map((category) => <button type="button" className={filter === category ? 'is-active' : ''} onClick={() => setFilter(category)} key={category}>{category}</button>)}</div><div className="page-project-grid">{shown.map((project) => <ProjectCard key={project.name} project={project} />)}</div></div></section></InnerLayout>
-}
-
-function ProjectDetailPage({ project, isCase = false }: { project: Project; isCase?: boolean }) {
-  const detail = projectDetails[project.name] ?? { challenge: 'Organizar uma necessidade real em uma experiência digital clara e acessível.', solution: 'O projeto foi construído com hierarquia editorial, componentes responsivos e os fluxos essenciais para seu público.', result: 'A solução foi publicada e pode ser conferida no link da entrega.' }
-  usePageMeta({ title: `${isCase ? 'Case ' : ''}${project.name} — Pixel Code Studio`, description: project.description, path: `${isCase ? '/cases' : '/projetos'}/${slugify(project.name)}` })
-  return <InnerLayout activeIndex={2}><Breadcrumbs current={isCase ? `Case ${project.name}` : project.name} /><section className="section page-section detail-header"><div className="inner-shell page-two-column"><div><p className="kicker"><Code2 aria-hidden="true" /> {categoryByProject[project.name] ?? project.kind}</p><h1>{project.name}</h1><p className="page-lead">{project.description}</p><div className="detail-actions"><a className="button button--primary" href={project.live} target="_blank" rel="noreferrer">Abrir projeto <ExternalLink aria-hidden="true" /></a>{project.repo && <a className="button button--ghost" href={project.repo} target="_blank" rel="noreferrer">Ver código <Code2 aria-hidden="true" /></a>}</div></div><figure className="detail-figure"><img src={project.imageSmall} srcSet={`${project.image.replace(/\.webp$/, '-480.webp')} 480w, ${project.imageSmall} 720w`} sizes="(max-width: 900px) calc(100vw - 32px), 52vw" width={project.imageWidth} height={project.imageHeight} alt={`Interface real do projeto ${project.name}`} /><figcaption>Captura da versão publicada</figcaption></figure></div></section><section className="section page-section page-section--tint"><div className="inner-shell detail-grid">{[['01 · Contexto', 'O que precisava ser resolvido', detail.challenge], ['02 · Solução', 'Como a solução ganhou forma', detail.solution], ['03 · Entrega', 'O que passou a existir', detail.result]].map(([label, title, text]) => <article key={label}><span>{label}</span><h2>{title}</h2><p>{text}</p></article>)}<article><span>04 · Tecnologias</span><h2>Base utilizada</h2><ul className="detail-tags">{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul></article></div></section><section className="section page-section"><div className="inner-shell page-cta"><div><p className="kicker"><Zap aria-hidden="true" /> Próximo projeto</p><h2>Quer conversar sobre uma ideia parecida?</h2></div><Link className="button button--primary" href="/contato">Falar sobre meu projeto <ArrowRight aria-hidden="true" /></Link></div></section></InnerLayout>
-}
-
-function FaqSection() { const faqs = [{ q: 'Como funciona a contratação?', a: 'Você apresenta a ideia pelo WhatsApp, Discord ou e-mail. O escopo é analisado antes do desenvolvimento.' }, { q: 'A Pixel faz projetos personalizados?', a: 'Sim. A estrutura é planejada para a necessidade específica do projeto.' }, { q: 'Como o prazo é definido?', a: 'O prazo depende do escopo, integrações e conteúdo e é combinado no atendimento.' }, { q: 'Quais formas de pagamento estão disponíveis?', a: 'O fluxo comercial trabalha com Pix ou cartão de crédito.' }, { q: 'Posso pedir alterações?', a: 'Ajustes dentro do escopo seguem a revisão combinada; mudanças novas são avaliadas separadamente.' }]; return <div className="faq-list">{faqs.map(({ q, a }) => <details key={q}><summary>{q}<span aria-hidden="true">+</span></summary><p>{a}</p></details>)}</div> }
-
-function ServicesPage() { const icons = [Layers3, Braces, Bot, Zap]; usePageMeta({ title: 'Serviços — Pixel Code Studio', description: 'Sites, plataformas, bots, automações e experiências digitais sob medida.', path: '/servicos' }); return <InnerLayout activeIndex={3}><Breadcrumbs current="Serviços" /><PageHero eyebrow="Serviços" title={<>Tecnologia aplicada a uma necessidade <em>real.</em></>} description="A Pixel planeja, desenha e desenvolve cada solução a partir do objetivo do projeto." /><section className="services-section"><div className="section services-inner"><div className="services-list page-services-list">{services.map((service, index) => { const Icon = icons[index]; return <article key={service.title}><span>{service.number}</span><Icon aria-hidden="true" /><div><h3>{service.title}</h3><p>{service.text}</p><Link className="text-link" href={`/contato?tipo=${encodeURIComponent(service.title)}`}>Solicitar orçamento <ArrowRight aria-hidden="true" /></Link></div></article> })}</div></div></section><section className="section page-section"><div className="inner-shell"><p className="kicker"><Check aria-hidden="true" /> Perguntas frequentes</p><h2>Antes de começar, <em>vamos deixar claro.</em></h2><FaqSection /></div></section></InnerLayout> }
-
-function ContactPage() { const { search, navigate } = useRouter(); const type = useMemo(() => new URLSearchParams(search).get('tipo') ?? '', [search]); const [error, setError] = useState(''); const [preparing, setPreparing] = useState(false); usePageMeta({ title: 'Contato — Pixel Code Studio', description: 'Apresente sua ideia pelo WhatsApp, Discord ou e-mail.', path: '/contato' }); function submit(event: FormEvent<HTMLFormElement>) { event.preventDefault(); const form = new FormData(event.currentTarget); const name = String(form.get('name') ?? '').trim(); const reply = String(form.get('reply') ?? '').trim(); const kind = String(form.get('type') ?? '').trim(); const message = String(form.get('message') ?? '').trim(); if (name.length < 2 || reply.length < 5 || kind.length < 2 || message.length < 20) { setError('Revise os campos. A mensagem precisa ter pelo menos 20 caracteres.'); return } setError(''); setPreparing(true); const subject = encodeURIComponent(`Novo projeto — ${kind}`); const body = encodeURIComponent(`Olá, sou ${name}.\n\nContato para resposta: ${reply}\nTipo de projeto: ${kind}\n\nIdeia:\n${message}`); window.location.href = `mailto:${email}?subject=${subject}&body=${body}`; window.setTimeout(() => navigate('/obrigado'), 260) } return <InnerLayout activeIndex={6}><Breadcrumbs current="Contato" /><PageHero eyebrow="Contato" title={<>Conte o que você quer <em>construir.</em></>} description="Escolha um canal rápido ou prepare uma mensagem completa." /><section className="section page-section"><div className="inner-shell contact-layout"><aside className="contact-channels"><p className="kicker"><Mail aria-hidden="true" /> Canais diretos</p><h2>Comece pelo caminho mais confortável.</h2><a href={whatsapp} target="_blank" rel="noreferrer"><strong>WhatsApp</strong><span>Conversa direta sobre escopo e orçamento</span><ArrowRight aria-hidden="true" /></a><a href={discord} target="_blank" rel="noreferrer"><strong>Discord</strong><span>Entre no servidor oficial da Pixel</span><ArrowRight aria-hidden="true" /></a><a href={`mailto:${email}`}><strong>E-mail</strong><span>{email}</span><ArrowRight aria-hidden="true" /></a><p className="response-note"><span className="status-dot" /> A mensagem será respondida assim que possível.</p></aside><form className="contact-form page-contact-form" onSubmit={submit} noValidate><div className="contact-form__heading"><span>Briefing inicial</span><strong>Quatro campos para começar</strong></div><label>Seu nome<input name="name" required minLength={2} placeholder="Como podemos chamar você?" /></label><label>Contato para resposta<input name="reply" required minLength={5} placeholder="E-mail, WhatsApp ou Discord" /></label><label>Tipo de projeto<select name="type" required defaultValue={type}><option value="" disabled>Selecione uma opção</option>{services.map((service) => <option value={service.title} key={service.title}>{service.title}</option>)}<option value="Projeto personalizado">Projeto personalizado</option></select></label><label>Conte sua ideia<textarea name="message" required minLength={20} rows={6} placeholder="O que precisa ser criado, para quem e qual resultado você espera?" /></label>{error && <p className="form-feedback--error" role="alert">{error}</p>}<p className="form-privacy">O site não armazena os dados deste formulário.</p><button className="button button--primary" type="submit" disabled={preparing}>{preparing ? 'Preparando mensagem…' : 'Preparar e-mail'} <ArrowUpRight aria-hidden="true" /></button></form></div></section></InnerLayout> }
-
-function PrivacyPage() { usePageMeta({ title: 'Política de Privacidade — Pixel Code Studio', description: 'Comportamento real de dados, armazenamento local e serviços externos.', path: '/privacidade' }); return <InnerLayout><Breadcrumbs current="Privacidade" /><PageHero eyebrow="Privacidade" title={<>Informação clara sobre o que o site <em>faz com seus dados.</em></>} description="Esta política descreve o comportamento atual do portfólio." /><article className="inner-shell legal-page"><p>Última atualização: 13 de setembro de 2026.</p><h2>Dados do formulário</h2><p>O formulário prepara uma mensagem no aplicativo de e-mail. O portfólio não possui backend de formulário e não armazena os campos em banco de dados.</p><h2>Serviços externos</h2><p>WhatsApp, Discord, GitHub, LinkedIn e YouTube possuem seus próprios termos e políticas.</p><h2>Armazenamento local</h2><p>O armazenamento local lembra apenas a preferência de tema claro ou escuro.</p><h2>Contato</h2><p>Dúvidas podem ser enviadas para <a href={`mailto:${email}`}>{email}</a>.</p></article></InnerLayout> }
-function ThankYouPage() { usePageMeta({ title: 'Mensagem preparada — Pixel Code Studio', description: 'Revise e envie sua mensagem para concluir o contato.', path: '/obrigado', noIndex: true }); return <InnerLayout><section className="status-page"><div className="status-card"><CheckCircle2 aria-hidden="true" /><p className="kicker"><Check aria-hidden="true" /> Próximo passo</p><h1>Sua mensagem foi preparada.</h1><p>Revise o conteúdo no aplicativo de e-mail e toque em enviar para concluir o contato.</p><div><Link className="button button--primary" href="/projetos">Ver projetos <ArrowRight aria-hidden="true" /></Link><Link className="button button--ghost" href="/">Voltar ao início</Link></div></div></section></InnerLayout> }
-function NotFoundPage() { usePageMeta({ title: 'Página não encontrada — Pixel Code Studio', description: 'A rota solicitada não existe no portfólio.', path: '/404', noIndex: true }); return <InnerLayout><section className="status-page"><div className="status-card"><FileText aria-hidden="true" /><p className="kicker"><ShieldCheck aria-hidden="true" /> Erro 404</p><h1>Essa página saiu do mapa.</h1><p>O endereço não existe ou foi movido. Volte ao portfólio para continuar explorando.</p><Link className="button button--primary" href="/">Voltar ao início <ArrowDownRight aria-hidden="true" /></Link></div></section></InnerLayout> }
-
-export function PortfolioRouter() { const { pathname } = useRouter(); if (pathname === '/') return <App />; if (pathname === '/sobre') return <AboutPage />; if (pathname === '/projetos') return <ProjectsPage />; if (pathname === '/servicos') return <ServicesPage />; if (pathname === '/contato') return <ContactPage />; if (pathname === '/privacidade') return <PrivacyPage />; if (pathname === '/obrigado') return <ThankYouPage />; const projectMatch = pathname.match(/^\/projetos\/([^/]+)$/); if (projectMatch) { const project = projects.find((candidate) => slugify(candidate.name) === projectMatch[1]); return project ? <ProjectDetailPage project={project} /> : <NotFoundPage /> } const caseMatch = pathname.match(/^\/cases\/([^/]+)$/); if (caseMatch) { const project = projects.find((candidate) => slugify(candidate.name) === caseMatch[1]); return project ? <ProjectDetailPage project={project} isCase /> : <NotFoundPage /> } return <NotFoundPage /> }

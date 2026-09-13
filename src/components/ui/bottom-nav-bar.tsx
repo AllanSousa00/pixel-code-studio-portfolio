@@ -1,7 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { useEffect, useRef, useState, type CSSProperties } from "react"
 import {
   BriefcaseBusiness,
   House,
@@ -45,7 +44,6 @@ export function BottomNavBar({
   defaultIndex = 0,
 }: BottomNavBarProps) {
   const [activeIndex, setActiveIndex] = useState(defaultIndex)
-  const prefersReducedMotion = useReducedMotion()
   const scrollFrame = useRef<number | null>(null)
   const navigatingTo = useRef<number | null>(null)
 
@@ -115,7 +113,7 @@ export function BottomNavBar({
 
     if (window.location.hash !== href) window.history.pushState(null, "", href)
 
-    if (prefersReducedMotion || Math.abs(distance) < 2) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || Math.abs(distance) < 2) {
       window.scrollTo(0, targetY)
       navigatingTo.current = null
       return
@@ -161,14 +159,11 @@ export function BottomNavBar({
   }
 
   return (
-    <motion.nav
-      initial={{ scale: 0.9, opacity: 0, y: -18 }}
-      animate={{ scale: 1, opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 26, delay: 0.5 }}
+    <nav
       role="navigation"
       aria-label="Navegação rápida"
       className={cn(
-        "bg-card/90 dark:bg-card/90 border border-border rounded-full flex items-center p-1.5 shadow-2xl space-x-1 min-w-[320px] max-w-[calc(100vw-20px)] h-[58px] backdrop-blur-xl",
+        "bottom-nav-bar bg-card/90 dark:bg-card/90 border border-border rounded-full flex items-center p-1.5 shadow-2xl space-x-1 min-w-[320px] max-w-[calc(100vw-20px)] h-[58px] backdrop-blur-xl",
         className,
       )}
     >
@@ -177,9 +172,8 @@ export function BottomNavBar({
         const isActive = activeIndex === idx
 
         return (
-          <motion.button
+          <button
             key={item.label}
-            whileTap={{ scale: 0.97 }}
             className={cn(
               "flex items-center justify-center px-3 py-2 rounded-full transition-colors duration-200 relative h-11 min-w-11 max-h-11 cursor-pointer",
               isActive
@@ -196,19 +190,9 @@ export function BottomNavBar({
               ? <GitHubLogo size={20} className="shrink-0 transition-colors duration-200" />
               : Icon && <Icon size={20} strokeWidth={2} aria-hidden className="shrink-0 transition-colors duration-200" />}
 
-            <motion.span
-              initial={false}
-              animate={{
-                width: isActive ? `${MOBILE_LABEL_WIDTH}px` : "0px",
-                opacity: isActive ? 1 : 0,
-                marginLeft: isActive ? "4px" : "0px",
-              }}
-              transition={{
-                width: { type: "spring", stiffness: 350, damping: 32 },
-                opacity: { duration: 0.19 },
-                marginLeft: { duration: 0.19 },
-              }}
-              className="shrink-0 overflow-hidden flex items-center max-w-[72px]"
+            <span
+              className={cn("bottom-nav-bar__label shrink-0 overflow-hidden flex items-center max-w-[72px]", isActive && "is-active")}
+              style={{ "--nav-label-width": `${MOBILE_LABEL_WIDTH}px` } as CSSProperties}
             >
               <span
                 className={cn(
@@ -219,11 +203,11 @@ export function BottomNavBar({
               >
                 {item.label}
               </span>
-            </motion.span>
-          </motion.button>
+            </span>
+          </button>
         )
       })}
-    </motion.nav>
+    </nav>
   )
 }
 

@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @font-face {
   font-family: 'Archivo';
@@ -183,6 +182,14 @@ em { color: var(--accent-text); font-weight: inherit; font-style: normal; }
 .text-rotate__segment { display: inline-flex; overflow: hidden; padding-bottom: .08em; }
 .text-rotate__character { display: inline-block; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.skip-link { position: fixed; z-index: 200; top: 10px; left: 10px; padding: 10px 14px; background: var(--lime); color: var(--lime-foreground); font-weight: 700; text-decoration: none; transform: translateY(-150%); transition: transform .2s ease; }
+.skip-link:focus { transform: translateY(0); }
+.route-fallback { min-height: 100vh; background: var(--paper); }
+.bottom-nav-bar { animation: bottom-nav-enter .6s cubic-bezier(.22, 1, .36, 1) .5s both; }
+.bottom-nav-bar button:active { transform: scale(.97); }
+.bottom-nav-bar__label { width: 0; margin-left: 0; opacity: 0; transition: width .45s cubic-bezier(.22, 1, .36, 1), margin-left .25s ease, opacity .2s ease; }
+.bottom-nav-bar__label.is-active { width: var(--nav-label-width); margin-left: 4px; opacity: 1; }
+@keyframes bottom-nav-enter { from { opacity: 0; transform: translateY(-18px) scale(.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
 .hero-actions { display: flex; gap: 10px; margin-top: 34px; }
 .button { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 21px; border: 1px solid transparent; text-decoration: none; font-size: 14px; font-weight: 700; transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease; cursor: pointer; }
 .button:hover { transform: translateY(-3px); }
@@ -429,6 +436,7 @@ a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .bottom-nav-bar { animation: none; }
 }
 
 @media (max-width: 360px) {

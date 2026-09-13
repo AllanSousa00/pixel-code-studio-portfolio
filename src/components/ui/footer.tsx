@@ -97,6 +97,8 @@ export function SiteFooter() {
           <img
             className="brand-logo"
             src={theme === "light" ? "/brand/logo-light.webp" : "/brand/logo-dark.webp"}
+            srcSet={theme === "light" ? "/brand/logo-light-340.webp 340w, /brand/logo-light.webp 609w" : "/brand/logo-dark-340.webp 340w, /brand/logo-dark.webp 609w"}
+            sizes="(max-width: 680px) 220px, 300px"
             alt=""
             width="609"
             height="136"

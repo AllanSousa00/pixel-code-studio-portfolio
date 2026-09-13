@@ -29,11 +29,14 @@ test('headers incluem controles de segurança e fallback de SPA', async () => {
 
 test('rotas públicas e metadados permanecem no shell atual', async () => {
   const router = await readFile(new URL('src/Router.tsx', root), 'utf8')
+  const pages = await readFile(new URL('src/pages/PortfolioPages.tsx', root), 'utf8')
   for (const route of ['/sobre', '/projetos', '/servicos', '/contato', '/privacidade', '/obrigado']) {
-    assert.match(router, new RegExp(`'${route}'`))
+    assert.match(pages, new RegExp(`'${route}'`))
   }
-  assert.match(router, /function NotFoundPage/)
-  assert.match(router, /function FaqSection\(\)/)
+  assert.match(router, /lazy\(\(\) => import\('\.\/App'\)\)/)
+  assert.match(router, /lazy\(\(\) => import\('\.\/pages\/PortfolioPages'\)\)/)
+  assert.match(pages, /function NotFoundPage/)
+  assert.match(pages, /function FaqSection\(\)/)
   const navbar = await readFile(new URL('src/components/ui/bottom-nav-bar.tsx', root), 'utf8')
   assert.match(navbar, /label: "Sobre mim"/)
   assert.match(navbar, /UserRound/)

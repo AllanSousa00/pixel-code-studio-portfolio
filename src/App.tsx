@@ -1,4 +1,3 @@
-/* oxlint-disable react/only-export-components -- route pages share this verified catalog. */
 import type { ComponentType, ReactNode } from 'react'
 import {
   MotionConfig,
@@ -32,6 +31,7 @@ import { Marquee } from './components/ui/Marquee'
 import SiteFooter from './components/ui/footer'
 import { DiscordIcon, WhatsAppIcon } from './components/ui/social-brand-icons'
 import TextRotate from './components/ui/TextRotate'
+import { projects, services } from './data/portfolio'
 
 const TypedTextRotate = TextRotate as ComponentType<{
   texts: string[]
@@ -39,108 +39,6 @@ const TypedTextRotate = TextRotate as ComponentType<{
   mainClassName?: string
   rotationInterval?: number
 }>
-
-type Project = {
-  name: string
-  kind: string
-  description: string
-  image: string
-  imageSmall: string
-  imageWidth: number
-  imageHeight: number
-  live: string
-  repo?: string
-  tags: string[]
-}
-
-export const projects: Project[] = [
-  {
-    name: 'Vértice ENEM',
-    kind: 'Plataforma educacional',
-    description: 'Biblioteca editorial de repertórios socioculturais, com busca, autenticação e uma experiência pensada para transformar referência em argumento.',
-    image: '/projects/vertice-enem.webp',
-    imageSmall: '/projects/vertice-enem-720.webp',
-    imageWidth: 1440,
-    imageHeight: 1835,
-    live: 'https://vertice-enem.contato-repertoryd.workers.dev',
-    tags: ['React', 'TypeScript', 'Cloudflare'],
-  },
-  {
-    name: 'Conexões Modernistas',
-    kind: 'Jogo educacional ao vivo',
-    description: 'Experiência para sala de aula com partidas individuais e ao vivo, códigos de acesso e conteúdo sobre as três gerações modernistas.',
-    image: '/projects/conexoes-modernistas.webp',
-    imageSmall: '/projects/conexoes-modernistas-720.webp',
-    imageWidth: 1280,
-    imageHeight: 980,
-    live: 'https://conexoes-modernistas.contato-repertoryd.workers.dev',
-    tags: ['React', 'Multiplayer', 'UX educacional'],
-  },
-  {
-    name: 'SIMITEC 2026',
-    kind: 'Portal de evento',
-    description: 'Portal completo para evento escolar, reunindo programação, inscrições, galeria, atendimento e conteúdo institucional em uma só experiência.',
-    image: '/projects/simitec.webp',
-    imageSmall: '/projects/simitec-720.webp',
-    imageWidth: 1280,
-    imageHeight: 5503,
-    live: 'https://simitec-ofc.pages.dev',
-    tags: ['JavaScript', 'Design editorial', 'Cloudflare Pages'],
-  },
-  {
-    name: 'Repertoryd',
-    kind: 'Produto digital',
-    description: 'Plataforma de estudo com catálogo de filmes e séries, repertórios por eixo temático, redações, simulados e área autenticada.',
-    image: '/projects/repertoryd.webp',
-    imageSmall: '/projects/repertoryd-720.webp',
-    imageWidth: 1280,
-    imageHeight: 720,
-    live: 'https://repertoryd.pages.dev',
-    tags: ['JavaScript', 'Autenticação', 'Plataforma'],
-  },
-  {
-    name: 'Português em Jogos',
-    kind: 'Hub de jogos',
-    description: 'Hub responsivo que organiza quiz e trilha de habilidades em experiências independentes, rápidas e preparadas para uso educacional.',
-    image: '/projects/portugues-em-jogos.webp',
-    imageSmall: '/projects/portugues-em-jogos-720.webp',
-    imageWidth: 1280,
-    imageHeight: 720,
-    live: 'https://portugues-em-jogos.pages.dev',
-    repo: 'https://github.com/AllanSousa00/Jogos-de-L-ngua-Portuguesa',
-    tags: ['JavaScript', 'Gamificação', 'Responsivo'],
-  },
-  {
-    name: 'Central de Autorizações',
-    kind: 'Fluxo operacional',
-    description: 'Formulário em etapas para receber solicitações de direitos de uso, organizar dados e conduzir cada pedido para análise.',
-    image: '/projects/site-de-pedidos.webp',
-    imageSmall: '/projects/site-de-pedidos-720.webp',
-    imageWidth: 1280,
-    imageHeight: 1184,
-    live: 'https://site-de-pedidos-pt.pages.dev',
-    tags: ['Formulários', 'Integração', 'Automação'],
-  },
-  {
-    name: 'Portal de Direitos',
-    kind: 'Sistema de solicitações',
-    description: 'Experiência acessível para pedidos de uso de software, com fluxo progressivo, finalidade detalhada e contato centralizado.',
-    image: '/projects/portal-direitos.webp',
-    imageSmall: '/projects/portal-direitos-720.webp',
-    imageWidth: 1280,
-    imageHeight: 1264,
-    live: 'https://portal-de-direitos-calculadora.pages.dev',
-    repo: 'https://github.com/AllanSousa00/Calculadora',
-    tags: ['HTML', 'JavaScript', 'UX de formulário'],
-  },
-]
-
-export const services = [
-  { icon: Layers3, number: '01', title: 'Sites que apresentam e vendem', text: 'Landing pages, portais e experiências institucionais com mensagem clara, identidade própria e navegação que leva à ação.' },
-  { icon: Braces, number: '02', title: 'Plataformas sob medida', text: 'Produtos digitais com áreas autenticadas, catálogos, painéis, formulários, integrações e regras específicas para o seu negócio.' },
-  { icon: Bot, number: '03', title: 'Bots e automações', text: 'Bots para Discord, WhatsApp e Telegram, além de fluxos que conectam atendimento, pedidos, pagamentos e operação.' },
-  { icon: Zap, number: '04', title: 'Experiências para jogos', text: 'Lojas, launchers, servidores e sistemas para Minecraft, FiveM e Roblox com apresentação profissional e comunidade no centro.' },
-]
 
 const process = [
   { icon: Compass, number: '01', title: 'Direção', text: 'Entendemos o objetivo, o público e o que precisa acontecer depois que alguém acessa o produto.' },
@@ -150,6 +48,7 @@ const process = [
 ]
 
 const technologies = ['Pixel Code Studio', 'Sites sob medida', 'Plataformas web', 'Bots e automações', 'Experiências para jogos', 'Design com identidade', 'Projetos reais']
+const serviceIcons = [Layers3, Braces, Bot, Zap]
 const rotatingWords = ['sites', 'plataformas', 'bots', 'experiências']
 const contactLink = 'mailto:allancruzsousa519@gmail.com?subject=Quero%20criar%20um%20projeto%20com%20a%20Pixel%20Code%20Studio'
 const whatsappLink = import.meta.env.VITE_WHATSAPP_URL?.trim() || 'https://wa.me/5583996309727?text=Ol%C3%A1%21%20Encontrei%20a%20Pixel%20Code%20Studio%20pelo%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.'
@@ -193,12 +92,13 @@ function App() {
 
   return (
     <MotionConfig reducedMotion="user">
+      <a className="skip-link" href="#main-content">Pular para o conteúdo</a>
       <motion.div className="scroll-progress" style={{ scaleX }} aria-hidden="true" />
       <header className="site-header">
         <BottomNavBar className="top-nav" />
       </header>
 
-      <main>
+      <main id="main-content">
         <section className="hero-section" id="inicio">
           <BackgroundPaths />
           <motion.div className="hero-orb hero-orb--lime" animate={reduceMotion ? {} : { x: [0, 24, 0], y: [0, -18, 0] }} transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }} aria-hidden="true" />
@@ -244,7 +144,7 @@ function App() {
         <section className="services-section" id="servicos">
           <div className="section services-inner">
             <Reveal className="services-intro"><p className="kicker kicker--dark"><Code2 aria-hidden="true" /> O que fazemos</p><h2>Do primeiro pixel<br />ao produto <em>no ar.</em></h2><p>Você traz a ideia. A gente transforma em uma experiência clara, bonita e pronta para funcionar.</p></Reveal>
-            <div className="services-list">{services.map(({ icon: Icon, number, title, text }, index) => <motion.article key={title} initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: '-70px' }} transition={{ delay: index * 0.08 }}><span>{number}</span><Icon aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></motion.article>)}</div>
+            <div className="services-list">{services.map(({ number, title, text }, index) => { const Icon = serviceIcons[index]; return <motion.article key={title} initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: '-70px' }} transition={{ delay: index * 0.08 }}><span>{number}</span><Icon aria-hidden="true" /><div><h3>{title}</h3><p>{text}</p></div></motion.article> })}</div>
           </div>
         </section>
 
