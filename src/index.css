@@ -200,7 +200,7 @@ em { color: var(--accent-text); font-weight: inherit; font-style: normal; }
 .marquee-set { display: flex; }
 .marquee span { height: 54px; display: inline-flex; align-items: center; gap: 10px; padding: 0 28px; border-right: 1px solid rgba(0,0,0,.24); font: 700 13px/1 var(--display); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
 
-.section { width: min(1240px, calc(100% - 48px)); margin-inline: auto; }
+.section { width: 100%; margin-inline: 0; padding-inline: clamp(20px, 5vw, 96px); }
 .projects-section, .process-section { padding-block: 130px; }
 .section-heading { display: grid; grid-template-columns: 1.2fr .8fr; align-items: end; gap: 60px; margin-bottom: 70px; }
 .section-heading h2, .services-intro h2, .cta-copy h2 { margin: 18px 0 0; font: 700 clamp(44px, 6.5vw, 92px)/.92 var(--display); letter-spacing: -.065em; }
@@ -270,7 +270,7 @@ em { color: var(--accent-text); font-weight: inherit; font-style: normal; }
 .process-grid h3 { margin: 0 0 18px; font: 700 26px/1 var(--display); letter-spacing: -.04em; }
 .process-grid p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
 
-.cta-section { position: relative; min-height: 650px; display: grid; grid-template-columns: 1fr .6fr; align-items: center; gap: 80px; padding: 90px max(24px, calc((100vw - 1240px) / 2)); overflow: hidden; background: var(--violet); color: var(--black); }
+.cta-section { position: relative; min-height: 650px; display: grid; grid-template-columns: 1fr .6fr; align-items: center; gap: 80px; padding: 90px clamp(20px, 5vw, 96px); overflow: hidden; background: var(--violet); color: var(--black); }
 .cta-grid { position: absolute; inset: 0; opacity: .18; background-image: linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg,#000 1px,transparent 1px); background-size: 70px 70px; }
 .cta-copy { position: relative; z-index: 1; }
 .cta-copy h2 em { color: #fff; }
@@ -307,7 +307,7 @@ a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255
 .contact-option > svg { width: 22px; height: 22px; color: var(--lime); }
 .contact-panel__note { margin: 18px 10px 6px; color: #8d8d94; font-size: 11px; line-height: 1.5; }
 
-.site-footer { width: min(1240px, calc(100% - 48px)); margin: 0 auto; padding: 76px 0 42px; }
+.site-footer { width: 100%; margin-inline: 0; padding: 76px clamp(20px, 5vw, 96px) 42px; }
 .site-footer__intro { display: grid; grid-template-columns: auto minmax(260px, 1fr) auto; align-items: center; gap: clamp(32px, 6vw, 90px); padding-bottom: 48px; }
 .brand--footer { align-self: center; width: clamp(205px, 19vw, 245px); height: 56px; }
 .brand-logo { display: block; width: 100%; height: 100%; object-fit: contain; object-position: left center; }
@@ -383,7 +383,7 @@ a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255
   .hero-actions { width: 100%; flex-direction: column; }
   .hero-counter { right: 18px; bottom: 25px; }
   .hero-counter strong { font-size: 44px; }
-  .section { width: min(100% - 28px, 1240px); }
+  .section { width: 100%; padding-inline: 16px; }
   .projects-section, .process-section { padding-block: 90px; }
   .section-heading { margin-bottom: 45px; }
   .section-heading h2, .services-intro h2, .cta-copy h2 { font-size: clamp(40px, 13vw, 62px); }
@@ -417,7 +417,7 @@ a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255
   .contact-option__copy strong { font-size: 20px; }
   .contact-option > svg { grid-column: 2; }
   .cta-symbol { position: absolute; opacity: .18; right: -80px; bottom: -60px; width: 300px; }
-  .site-footer { width: calc(100% - 32px); padding-top: 58px; }
+  .site-footer { width: 100%; padding: 58px 16px 32px; }
   .site-footer__intro { grid-template-columns: 1fr; gap: 24px; }
   .site-footer__cta { grid-column: 1; width: 100%; }
   .site-footer__navigation { grid-template-columns: repeat(2, 1fr); gap: 36px 22px; }
@@ -540,8 +540,3 @@ a.contact-option:hover { transform: translateY(-3px); border-color: rgba(255,255
 @media (min-width: 2400px) {
   .page-project-grid, .page-project-grid--three { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
-
-/* Internal pages share the same fluid gutter as their sections. The home page
-   keeps its approved centered footer layout. */
-.inner-main + .site-footer { width: 100%; margin-inline: 0; padding-inline: clamp(20px, 5vw, 96px); }
-@media (max-width: 680px) { .inner-main + .site-footer { padding-inline: 16px; } }
