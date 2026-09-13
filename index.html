@@ -26,16 +26,7 @@
     <meta name="twitter:description" content="Projetos reais, serviços digitais e cases desenvolvidos por Allan Sousa." />
     <meta name="twitter:image" content="https://pixel-code-studio-portfolio.pages.dev/brand/og-pixel-code-studio.png" />
     <meta name="twitter:image:alt" content="Pixel Code Studio — sites, plataformas, bots e experiências digitais" />
-    <script>
-      try {
-        const savedTheme = localStorage.getItem('pixel-code-theme')
-        const theme = savedTheme === 'light' || savedTheme === 'dark'
-          ? savedTheme
-          : matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
-        document.documentElement.dataset.theme = theme
-        document.documentElement.style.colorScheme = theme
-      } catch {}
-    </script>
+    <script src="/theme.js"></script>
     <title>Pixel Code Studio — Portfólio</title>
   </head>
   <body>
