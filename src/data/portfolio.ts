@@ -110,21 +110,81 @@ export const categoryByProject: Record<string, string> = {
   'Portal de Direitos': 'Sistemas',
 }
 
-export const projectDetails: Record<string, { challenge: string; solution: string; result: string }> = {
+export type ProjectChapter = {
+  label: string
+  title: string
+  text: string
+}
+
+export type ProjectDetail = {
+  storyTitle: string
+  storyIntro: string
+  chapters: ProjectChapter[]
+}
+
+export const projectDetails: Record<string, ProjectDetail> = {
   'Vértice ENEM': {
-    challenge: 'Organizar repertórios socioculturais sem esconder o contexto necessário para usar cada referência.',
-    solution: 'A informação foi dividida em jornadas curtas, com busca, páginas editoriais e áreas conectadas por uma linguagem visual consistente.',
-    result: 'O conteúdo passou a existir em uma plataforma publicada e preparada para consulta por tema e contexto.',
+    storyTitle: 'Repertório que chega rápido e continua fazendo sentido.',
+    storyIntro: 'O Vértice ENEM organiza referências para quem precisa encontrar, entender e transformar conteúdo em argumento.',
+    chapters: [
+      { label: 'Ponto de partida', title: 'Encontrar uma referência sem perder o contexto', text: 'Uma lista extensa resolveria a quantidade, mas não ajudaria na hora de escrever. O conteúdo precisava continuar explicando por que cada repertório importa e em quais temas ele pode ser usado.' },
+      { label: 'Decisão central', title: 'Busca, leitura e escrita no mesmo caminho', text: 'A navegação foi organizada por eixos temáticos e páginas editoriais. Cada etapa aproxima o estudante da informação certa sem interromper a leitura com controles desnecessários.' },
+      { label: 'No ar', title: 'Uma biblioteca feita para virar argumento', text: 'A versão publicada reúne repertórios, redações e acesso autenticado em uma experiência responsiva que pode ser consultada durante toda a preparação para o ENEM.' },
+    ],
   },
   'Conexões Modernistas': {
-    challenge: 'Transformar conteúdo literário em uma dinâmica que funcionasse individualmente e em atividade coletiva.',
-    solution: 'O projeto reúne acesso por código, modos de jogo distintos, rodadas de conteúdo e feedback visual.',
-    result: 'A proposta foi publicada como uma experiência web responsiva que conecta conteúdo e interação.',
+    storyTitle: 'Modernismo virou partida, código e conversa em sala.',
+    storyIntro: 'O conteúdo literário ganhou uma dinâmica que funciona tanto no estudo individual quanto em uma atividade conduzida ao vivo.',
+    chapters: [
+      { label: 'Ponto de partida', title: 'Literatura com ritmo de atividade coletiva', text: 'O desafio era tirar as três gerações modernistas de uma apresentação passiva e criar uma experiência que mantivesse a turma participando do começo ao fim.' },
+      { label: 'Decisão central', title: 'Duas formas de jogar, uma mesma linguagem', text: 'O projeto separa o modo individual das partidas ao vivo e usa códigos de acesso para conectar cada participante à rodada certa, com feedback claro a cada resposta.' },
+      { label: 'No ar', title: 'Conteúdo que continua depois da explicação', text: 'A experiência publicada permite revisar o tema sozinho ou transformar a aula em uma partida compartilhada, sem exigir instalação.' },
+    ],
   },
   'SIMITEC 2026': {
-    challenge: 'Reunir informações de evento, inscrição e atendimento sem perder a orientação do visitante.',
-    solution: 'Uma hierarquia editorial separa programação, conteúdo institucional, galeria e chamada para inscrição.',
-    result: 'O evento ganhou um ponto de acesso público e responsivo para concentrar sua comunicação.',
+    storyTitle: 'Toda a experiência do evento em um único endereço.',
+    storyIntro: 'O portal do SIMITEC 2026 foi pensado para orientar visitantes antes, durante e depois da programação.',
+    chapters: [
+      { label: 'Ponto de partida', title: 'Muita informação disputando a mesma atenção', text: 'Programação, inscrições, conteúdo institucional, galeria e atendimento precisavam conviver sem transformar a página em um mural difícil de percorrer.' },
+      { label: 'Decisão central', title: 'A programação virou o eixo da navegação', text: 'A hierarquia editorial aproxima primeiro as informações práticas e distribui o restante em blocos com ritmo, contraste e chamadas claras para inscrição.' },
+      { label: 'No ar', title: 'Um portal que acompanha o evento', text: 'A versão publicada concentra a comunicação do SIMITEC em uma página responsiva, preparada para consulta rápida no celular e apresentação em telas maiores.' },
+    ],
+  },
+  Repertoryd: {
+    storyTitle: 'Do catálogo à redação, sem quebrar o ritmo de estudo.',
+    storyIntro: 'O Repertoryd reúne descoberta, repertório e prática em uma plataforma que ajuda o estudante a avançar com direção.',
+    chapters: [
+      { label: 'Ponto de partida', title: 'Referências demais, pouca orientação para usar', text: 'Filmes, séries e temas só seriam úteis se o estudante entendesse a relação entre cada obra e o argumento que deseja construir.' },
+      { label: 'Decisão central', title: 'Descoberta e prática passaram a conversar', text: 'O catálogo foi conectado a eixos temáticos, repertórios, redações e simulados. A área autenticada mantém essa jornada organizada em vez de apresentar ferramentas isoladas.' },
+      { label: 'No ar', title: 'Um produto que acompanha a preparação', text: 'A plataforma publicada oferece um caminho contínuo entre encontrar uma referência, estudar seu contexto e praticar a aplicação em uma redação.' },
+    ],
+  },
+  'Português em Jogos': {
+    storyTitle: 'Praticar português com a lógica de um jogo.',
+    storyIntro: 'O hub transforma exercícios em experiências curtas, diretas e fáceis de abrir em qualquer dispositivo.',
+    chapters: [
+      { label: 'Ponto de partida', title: 'Exercício sem aparência de lista', text: 'O conteúdo precisava continuar didático sem repetir a estrutura de uma atividade impressa dentro da tela.' },
+      { label: 'Decisão central', title: 'Duas experiências, um mesmo ponto de entrada', text: 'Quiz e trilha de habilidades foram separados em jogos independentes, enquanto o hub mantém a escolha simples e apresenta cada proposta antes de começar.' },
+      { label: 'No ar', title: 'Português praticado jogando', text: 'A publicação reúne atividades responsivas e rápidas, prontas para uso educacional no computador ou no celular.' },
+    ],
+  },
+  'Central de Autorizações': {
+    storyTitle: 'Um pedido bem explicado antes da análise começar.',
+    storyIntro: 'A Central de Autorizações organiza solicitações de direitos de uso em uma sequência curta e compreensível.',
+    chapters: [
+      { label: 'Ponto de partida', title: 'Pedidos diferentes chegavam sem o mesmo padrão', text: 'Sem uma estrutura comum, informações essenciais podiam ficar espalhadas ou faltar justamente quando a solicitação chegava à análise.' },
+      { label: 'Decisão central', title: 'As perguntas entram na ordem certa', text: 'O formulário foi dividido em etapas para apresentar uma decisão por vez, explicar o que está sendo solicitado e reunir os dados necessários sem sobrecarregar a primeira tela.' },
+      { label: 'No ar', title: 'Uma solicitação pronta para ser avaliada', text: 'O fluxo publicado conduz o pedido do início ao envio com contexto, finalidade e contato organizados no mesmo percurso.' },
+    ],
+  },
+  'Portal de Direitos': {
+    storyTitle: 'Direitos de uso explicados passo a passo.',
+    storyIntro: 'O Portal de Direitos transforma uma solicitação técnica em uma conversa clara para quem pede e para quem avalia.',
+    chapters: [
+      { label: 'Ponto de partida', title: 'Explicar o uso de software sem criar ruído', text: 'A pessoa precisava informar finalidade, contexto e contato sem enfrentar um formulário longo ou termos soltos desde o primeiro momento.' },
+      { label: 'Decisão central', title: 'Cada etapa responde uma dúvida', text: 'O fluxo progressivo separa as escolhas, mantém instruções próximas dos campos e mostra somente o que é necessário para a decisão atual.' },
+      { label: 'No ar', title: 'Um registro claro de cada solicitação', text: 'A experiência publicada centraliza o pedido e deixa o caminho mais previsível tanto para quem solicita quanto para quem recebe os dados.' },
+    ],
   },
 }
 
