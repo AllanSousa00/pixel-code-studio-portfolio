@@ -23,6 +23,7 @@ test('headers incluem controles de segurança e fallback de SPA', async () => {
   const redirects = await readFile(new URL('public/_redirects', root), 'utf8')
   assert.match(headers, /Content-Security-Policy:/)
   assert.match(headers, /X-Content-Type-Options: nosniff/)
+  assert.match(headers, /Strict-Transport-Security: max-age=31536000; includeSubDomains/)
   assert.match(headers, /frame-ancestors 'none'/)
   assert.match(redirects, /\/\* \/index\.html 200/)
 })
